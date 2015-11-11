@@ -9,6 +9,6 @@ namespace TravelListAppG7.DataModel
         private string Destination;
         private string Season;
         private int Year;
-        private PackingList PackingList;
+        private ICollection<Categorie> PackingList;
     }
 }

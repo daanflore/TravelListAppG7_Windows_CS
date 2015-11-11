@@ -7,7 +7,7 @@ namespace TravelListAppG7
 {
     public class TodoItem
     {
-        public string Id { get; set; }
+        private string Id { get; set; }
 
         [JsonProperty(PropertyName = "text")]
         public string Text { get; set; }

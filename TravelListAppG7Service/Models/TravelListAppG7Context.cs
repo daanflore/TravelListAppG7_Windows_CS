@@ -39,6 +39,14 @@ namespace TravelListAppG7Service.Models
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
         }
+
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<TravelList> TravelLists { get; set; }
+
+        public DbSet<PackingItem> PackingItems { get; set; }
+
+        public DbSet<Categorie> Categories { get; set; }
     }
 
 }

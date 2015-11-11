@@ -9,5 +9,6 @@ namespace TravelListAppG7.DataModel
         private List<TravelList> travelDestinations;
         private string username;
         
+        
     }
 }
