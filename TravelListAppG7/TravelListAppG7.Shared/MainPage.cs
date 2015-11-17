@@ -7,6 +7,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using TravelListAppG7.DataModel;
 
 // To add offline sync support, add the NuGet package Microsoft.WindowsAzure.MobileServices.SQLiteStore
 // to your project. Then, uncomment the lines marked // offline sync
@@ -18,10 +19,9 @@ namespace TravelListAppG7
 {
     sealed partial class MainPage: Page
     {
-        private MobileServiceCollection<TodoItem, TodoItem> items;
-        private IMobileServiceTable<TodoItem> todoTable = App.MobileService.GetTable<TodoItem>();
-        //private IMobileServiceSyncTable<TodoItem> todoTable = App.MobileService.GetSyncTable<TodoItem>(); // offline sync
-
+        private MobileServiceCollection<User, User> users;
+        private IMobileServiceTable<User> userTable = App.MobileService.GetTable<User>();
+        
         public MainPage()
         {
             this.InitializeComponent();
@@ -31,8 +31,8 @@ namespace TravelListAppG7
         {
             // This code inserts a new TodoItem into the database. When the operation completes
             // and Mobile Services has assigned an Id, the item is added to the CollectionView
-            await todoTable.InsertAsync(todoItem);
-            items.Add(todoItem);
+            //await todoTable.InsertAsync(todoItem);
+            //items.Add(todoItem);
 
             //await SyncAsync(); // offline sync
         }
@@ -44,9 +44,9 @@ namespace TravelListAppG7
             {
                 // This code refreshes the entries in the list view by querying the TodoItems table.
                 // The query excludes completed TodoItems
-                items = await todoTable
-                    .Where(todoItem => todoItem.Complete == false)
-                    .ToCollectionAsync();
+                //items = await todoTable
+                //    .Where(todoItem => todoItem.Complete == false)
+                ///    .ToCollectionAsync();
             }
             catch (MobileServiceInvalidOperationException e)
             {
@@ -59,8 +59,8 @@ namespace TravelListAppG7
             }
             else
             {
-                ListItems.ItemsSource = items;
-                this.ButtonSave.IsEnabled = true;
+                //ListItems.ItemsSource = items;
+                
             }
         }
 
@@ -68,26 +68,21 @@ namespace TravelListAppG7
         {
             // This code takes a freshly completed TodoItem and updates the database. When the MobileService 
             // responds, the item is removed from the list 
-            await todoTable.UpdateAsync(item);
-            items.Remove(item);
-            ListItems.Focus(Windows.UI.Xaml.FocusState.Unfocused);
+            //await todoTable.UpdateAsync(item);
+            //items.Remove(item);
+            //ListItems.Focus(Windows.UI.Xaml.FocusState.Unfocused);
 
             //await SyncAsync(); // offline sync
         }
 
         private async void ButtonRefresh_Click(object sender, RoutedEventArgs e)
         {
-            ButtonRefresh.IsEnabled = false;
-
-            //await SyncAsync(); // offline sync
-            await RefreshTodoItems();
-
-            ButtonRefresh.IsEnabled = true;
+            
         }
 
         private async void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            var todoItem = new TodoItem { Text = TextInput.Text };
+            var todoItem = new TodoItem { Text = TextUsername.Text };
             await InsertTodoItem(todoItem);
         }
 

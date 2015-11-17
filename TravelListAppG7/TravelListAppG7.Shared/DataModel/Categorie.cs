@@ -6,8 +6,9 @@ namespace TravelListAppG7.DataModel
 {
     public class Categorie
     {
-        private string name;
-        private List<PackingItem> packingItems;
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public List<PackingItem> packingItems { get; set; }
         
 
     }
