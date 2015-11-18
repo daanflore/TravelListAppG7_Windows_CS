@@ -37,32 +37,7 @@ namespace TravelListAppG7
             //await SyncAsync(); // offline sync
         }
 
-        private async Task RefreshTodoItems()
-        {
-            MobileServiceInvalidOperationException exception = null;
-            try
-            {
-                // This code refreshes the entries in the list view by querying the TodoItems table.
-                // The query excludes completed TodoItems
-                //items = await todoTable
-                //    .Where(todoItem => todoItem.Complete == false)
-                ///    .ToCollectionAsync();
-            }
-            catch (MobileServiceInvalidOperationException e)
-            {
-                exception = e;
-            }
-
-            if (exception != null)
-            {
-                await new MessageDialog(exception.Message, "Error loading items").ShowAsync();
-            }
-            else
-            {
-                //ListItems.ItemsSource = items;
-                
-            }
-        }
+        
 
         private async Task UpdateCheckedTodoItem(TodoItem item)
         {
@@ -75,12 +50,12 @@ namespace TravelListAppG7
             //await SyncAsync(); // offline sync
         }
 
-        private async void ButtonRefresh_Click(object sender, RoutedEventArgs e)
+        private async void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
             
         }
 
-        private async void ButtonSave_Click(object sender, RoutedEventArgs e)
+        private async void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
             var todoItem = new TodoItem { Text = TextUsername.Text };
             await InsertTodoItem(todoItem);
@@ -92,33 +67,5 @@ namespace TravelListAppG7
             TodoItem item = cb.DataContext as TodoItem;
             await UpdateCheckedTodoItem(item);
         }
-
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
-        {
-            //await InitLocalStoreAsync(); // offline sync
-            await RefreshTodoItems();
-        }
-
-        #region Offline sync
-
-        //private async Task InitLocalStoreAsync()
-        //{
-        //    if (!App.MobileService.SyncContext.IsInitialized)
-        //    {
-        //        var store = new MobileServiceSQLiteStore("localstore.db");
-        //        store.DefineTable<TodoItem>();
-        //        await App.MobileService.SyncContext.InitializeAsync(store);
-        //    }
-        //
-        //    await SyncAsync();
-        //}
-
-        //private async Task SyncAsync()
-        //{
-        //    await App.MobileService.SyncContext.PushAsync();
-        //    await todoTable.PullAsync("todoItems", todoTable.CreateQuery());
-        //}
-
-        #endregion 
     }
 }
