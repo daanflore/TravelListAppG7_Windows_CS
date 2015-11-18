@@ -8,7 +8,9 @@ namespace TravelListAppG7.DataModel
     {
         public string Id { get; set; }
         public List<TravelList> travelDestinations;
-        public string username;
+        public string username { get; set; }
+        public string salt
+ { get; set; }
         
         
     }

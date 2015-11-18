@@ -9,11 +9,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using TravelListAppG7.DataModel;
 
-// To add offline sync support, add the NuGet package Microsoft.WindowsAzure.MobileServices.SQLiteStore
-// to your project. Then, uncomment the lines marked // offline sync
-// For more information, see: http://aka.ms/addofflinesync
-//using Microsoft.WindowsAzure.MobileServices.SQLiteStore;  // offline sync
-//using Microsoft.WindowsAzure.MobileServices.Sync;         // offline sync
 
 namespace TravelListAppG7
 {
@@ -57,8 +52,14 @@ namespace TravelListAppG7
 
         private async void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
-            var todoItem = new TodoItem { Text = TextUsername.Text };
-            await InsertTodoItem(todoItem);
+            try
+            {
+                await userTable.
+            }
+            catch (Exception ex) {
+                
+            }
+            
         }
 
         private async void CheckBoxComplete_Checked(object sender, RoutedEventArgs e)
