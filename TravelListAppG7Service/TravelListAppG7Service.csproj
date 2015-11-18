@@ -191,12 +191,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CategorieController.cs" />
     <Compile Include="Controllers\PackingItemController.cs" />
-    <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="Controllers\TravelListController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataObjects\Categorie.cs" />
     <Compile Include="DataObjects\PackingItem.cs" />
-    <Compile Include="DataObjects\TodoItem.cs" />
     <Compile Include="DataObjects\TravelList.cs" />
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="Models\TravelListAppG7Context.cs" />

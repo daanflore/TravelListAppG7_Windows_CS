@@ -22,6 +22,7 @@ namespace TravelListAppG7Service.Controllers
         // GET tables/User
         public IQueryable<User> GetAllUser()
         {
+            IQueryable<User> users = Query();
             return Query(); 
         }
 

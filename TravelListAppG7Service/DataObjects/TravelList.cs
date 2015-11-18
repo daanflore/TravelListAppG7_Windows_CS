@@ -5,6 +5,7 @@ namespace TravelListAppG7Service.DataObjects
 {
     public class TravelList : EntityData
     {
+        public string UserId { get; set; }
         public string Destination { get; set; }
         public string Season { get; set; }
         public int Year { get; set; }

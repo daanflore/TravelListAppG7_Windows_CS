@@ -9,9 +9,8 @@ namespace TravelListAppG7Service.DataObjects
 {
     public class User : EntityData
     {
-        public ICollection<TravelList> travelDestinations { get; set; }
+        public virtual ICollection<TravelList> travelDestinations { get; set; }
         public string username { get; set; }
-
         public string password { get; set; }
     }
 }

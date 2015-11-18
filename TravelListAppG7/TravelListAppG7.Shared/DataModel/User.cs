@@ -7,10 +7,8 @@ namespace TravelListAppG7.DataModel
     public class User
     {
         public string Id { get; set; }
-        public List<TravelList> travelDestinations;
-        public string username { get; set; }
-        public string salt
- { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
         
         
     }
