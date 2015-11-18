@@ -8,7 +8,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using TravelListAppG7.DataModel;
-
+using TravelListAppG7.Domain;
 
 namespace TravelListAppG7
 {
@@ -16,45 +16,36 @@ namespace TravelListAppG7
     {
         private MobileServiceCollection<User, User> users;
         private IMobileServiceTable<User> userTable = App.MobileService.GetTable<User>();
-        
+        private DomainController dc;
         public MainPage()
         {
             this.InitializeComponent();
+            dc = DomainController.Instance;
         }
 
-        private async Task InsertTodoItem(TodoItem todoItem)
+        private async Task Register(User userItem)
         {
-            // This code inserts a new TodoItem into the database. When the operation completes
-            // and Mobile Services has assigned an Id, the item is added to the CollectionView
-            //await todoTable.InsertAsync(todoItem);
-            //items.Add(todoItem);
+            await userTable.InsertAsync(userItem);
+            dc.user = userItem;
+            
 
-            //await SyncAsync(); // offline sync
+
         }
 
         
 
-        private async Task UpdateCheckedTodoItem(TodoItem item)
-        {
-            // This code takes a freshly completed TodoItem and updates the database. When the MobileService 
-            // responds, the item is removed from the list 
-            //await todoTable.UpdateAsync(item);
-            //items.Remove(item);
-            //ListItems.Focus(Windows.UI.Xaml.FocusState.Unfocused);
-
-            //await SyncAsync(); // offline sync
-        }
-
+       
         private async void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
-            
+            var userItem = new User { Username = TextUsername.Text, Password = TextPassword.Text };
+            await Register(userItem);
         }
 
         private async void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                await userTable.
+                //await userTable.ToString();
             }
             catch (Exception ex) {
                 
@@ -66,7 +57,7 @@ namespace TravelListAppG7
         {
             CheckBox cb = (CheckBox)sender;
             TodoItem item = cb.DataContext as TodoItem;
-            await UpdateCheckedTodoItem(item);
+            
         }
     }
 }
