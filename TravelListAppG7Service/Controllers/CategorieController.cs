@@ -29,7 +29,7 @@ namespace TravelListAppG7Service.Controllers
         {
             return Lookup(id);
         }
-
+        
         // PATCH tables/Categorie/48D68C86-6EA6-4C25-AA33-223FC9A27959
         public Task<Categorie> PatchCategorie(string id, Delta<Categorie> patch)
         {

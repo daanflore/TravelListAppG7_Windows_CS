@@ -14,8 +14,7 @@ namespace TravelListAppG7
 {
     sealed partial class MainPage: Page
     {
-        private MobileServiceCollection<User, User> users;
-        private IMobileServiceTable<User> userTable = App.MobileService.GetTable<User>();
+
         private DomainController dc;
         public MainPage()
         {
@@ -23,33 +22,16 @@ namespace TravelListAppG7
             dc = DomainController.Instance;
         }
 
-        private async Task Register(User userItem)
-        {
-            await userTable.InsertAsync(userItem);
-            dc.user = userItem;
-            
-
-
-        }
-
-        
-
-       
-        private async void ButtonRegister_Click(object sender, RoutedEventArgs e)
+             
+        private void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
             var userItem = new User { Username = TextUsername.Text, Password = TextPassword.Text };
-            await Register(userItem);
+            dc.Register(userItem);
         }
 
-        private async void ButtonLogin_Click(object sender, RoutedEventArgs e)
+        private  void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                //await userTable.ToString();
-            }
-            catch (Exception ex) {
-                
-            }
+            dc.Login(TextUsername.Text, TextPassword.Text);
             
         }
 

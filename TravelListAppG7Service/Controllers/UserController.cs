@@ -7,6 +7,7 @@ using Microsoft.WindowsAzure.Mobile.Service;
 using TravelListAppG7Service.DataObjects;
 using TravelListAppG7Service.Models;
 using System;
+using System.Net;
 
 namespace TravelListAppG7Service.Controllers
 {
@@ -43,6 +44,12 @@ namespace TravelListAppG7Service.Controllers
         // POST tables/User
         public async Task<IHttpActionResult> PostUser(User item)
         {
+            User userFound = Query().Where(i => i.username == item.username).FirstOrDefault();
+            if (userFound!=null)
+            {
+                
+                return Content(HttpStatusCode.Conflict, String.Format("A user with the username: {0} already exists",item.username));
+            }
             User current = await InsertAsync(item);
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
@@ -52,6 +59,13 @@ namespace TravelListAppG7Service.Controllers
         {
              return DeleteAsync(id);
         }
+
+        [Route("api/tables/Users/login")]
+        public SingleResult<User> Login(string userName, string Password)
+        {
+            return SingleResult.Create<User>(Query().Where(i => i.username == userName && i.password==Password));
+        }
+
 
     }
 }
