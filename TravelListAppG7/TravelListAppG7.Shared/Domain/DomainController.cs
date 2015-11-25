@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using TravelListAppG7.DataModel;
 
 namespace TravelListAppG7.Domain
@@ -40,16 +41,13 @@ namespace TravelListAppG7.Domain
             }
             
         }
-        public async void Login(string Username, string password) {
-            try
-            {
-                var user = await App.MobileService.InvokeApiAsync<User>("tables/Users/login?userName=daan&Password=daan");
-                
+        public async Task<bool> Login(string Username, string password)  {
+                this.user = await App.MobileService.InvokeApiAsync<User>("tables/Users/login?userName="+Username.Trim()+"&Password="+password.Trim());
+            if (this.user == null) {
+                throw new ConnectionException("Could not connect to the online service");
             }
-            catch (Exception ex) {
-                var str= ex.Message;
-            }
-
+            return true;
+           
         }
     }
 

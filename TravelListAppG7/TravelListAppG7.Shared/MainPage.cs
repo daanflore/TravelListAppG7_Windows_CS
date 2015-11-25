@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using TravelListAppG7.DataModel;
 using TravelListAppG7.Domain;
+using TravelListAppG7.Controls;
 
 namespace TravelListAppG7
 {
@@ -27,19 +28,28 @@ namespace TravelListAppG7
         {
             var userItem = new User { Username = TextUsername.Text, Password = TextPassword.Text };
             dc.Register(userItem);
+            Frame.Navigate(typeof(TravelDestinationList));
         }
 
-        private  void ButtonLogin_Click(object sender, RoutedEventArgs e)
+        private async void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
-            dc.Login(TextUsername.Text, TextPassword.Text);
-            
+            try
+            {
+                ButtonLogin.IsEnabled = false;
+                ButtonRegister.IsEnabled = false;
+                await dc.Login(TextUsername.Text, TextPassword.Text);
+                Frame.Navigate(typeof(TravelDestinationList));
+            }
+            catch (Exception ex)
+            {
+                MessageDialog msgbox = new MessageDialog(ex.Message);
+                await msgbox.ShowAsync();
+            }
+            finally {
+                ButtonLogin.IsEnabled = true;
+                ButtonRegister.IsEnabled = true;
+            }
         }
 
-        private async void CheckBoxComplete_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckBox cb = (CheckBox)sender;
-            TodoItem item = cb.DataContext as TodoItem;
-            
-        }
     }
 }

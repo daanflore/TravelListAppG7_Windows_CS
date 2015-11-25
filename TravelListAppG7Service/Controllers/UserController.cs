@@ -63,7 +63,11 @@ namespace TravelListAppG7Service.Controllers
         [Route("api/tables/Users/login")]
         public SingleResult<User> Login(string userName, string Password)
         {
-            return SingleResult.Create<User>(Query().Where(i => i.username == userName && i.password==Password));
+            var user = Query().Where(i => i.username == userName && i.password == Password);
+            if (user == null) {
+                throw new ArgumentException("We could not find a user with the given credentials");
+            }
+            return SingleResult.Create<User>(user);
         }
 
 
