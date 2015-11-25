@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,9 +8,15 @@ namespace TravelListAppG7.DataModel
     public class TravelList
     {
         public string Id { get; set; }
-        private string Destination;
-        private string Season;
-        private int Year;
-        private ICollection<Categorie> PackingList;
+        [JsonProperty(PropertyName = "destination")]
+
+        public string Destination { get; set; }
+        [JsonProperty(PropertyName = "season")]
+
+        public string Season { get; set; }
+        [JsonProperty(PropertyName = "year")]
+
+        public int Year { get; set; }
+        
     }
 }

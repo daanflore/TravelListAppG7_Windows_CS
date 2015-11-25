@@ -24,11 +24,24 @@ namespace TravelListAppG7
         }
 
              
-        private void ButtonRegister_Click(object sender, RoutedEventArgs e)
+        private async void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
-            var userItem = new User { Username = TextUsername.Text, Password = TextPassword.Text };
-            dc.Register(userItem);
-            Frame.Navigate(typeof(TravelDestinationList));
+            try
+            {
+                ButtonLogin.IsEnabled = false;
+                ButtonRegister.IsEnabled = false;
+                var userItem = new User { Username = TextUsername.Text, Password = TextPassword.Text };
+                await dc.Register(userItem);
+                Frame.Navigate(typeof(HomePage));
+            }
+            catch (Exception ex) {
+                MessageDialog msgbox = new MessageDialog(ex.Message);
+                await msgbox.ShowAsync();
+            }
+            finally {
+                ButtonLogin.IsEnabled = true;
+                ButtonRegister.IsEnabled = true;
+            }
         }
 
         private async void ButtonLogin_Click(object sender, RoutedEventArgs e)
@@ -38,7 +51,7 @@ namespace TravelListAppG7
                 ButtonLogin.IsEnabled = false;
                 ButtonRegister.IsEnabled = false;
                 await dc.Login(TextUsername.Text, TextPassword.Text);
-                Frame.Navigate(typeof(TravelDestinationList));
+                Frame.Navigate(typeof(HomePage));
             }
             catch (Exception ex)
             {

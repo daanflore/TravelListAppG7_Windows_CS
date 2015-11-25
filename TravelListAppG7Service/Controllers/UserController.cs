@@ -8,6 +8,7 @@ using TravelListAppG7Service.DataObjects;
 using TravelListAppG7Service.Models;
 using System;
 using System.Net;
+using System.Collections.Generic;
 
 namespace TravelListAppG7Service.Controllers
 {
@@ -63,11 +64,8 @@ namespace TravelListAppG7Service.Controllers
         [Route("api/tables/Users/login")]
         public SingleResult<User> Login(string userName, string Password)
         {
-            var user = Query().Where(i => i.username == userName && i.password == Password);
-            if (user == null) {
-                throw new ArgumentException("We could not find a user with the given credentials");
-            }
-            return SingleResult.Create<User>(user);
+            IQueryable<User> user = Query().Where(i => i.username == userName && i.password == Password);
+             return SingleResult.Create<User>(user);
         }
 
 
