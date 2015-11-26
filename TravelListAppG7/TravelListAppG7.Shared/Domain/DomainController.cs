@@ -52,6 +52,10 @@ namespace TravelListAppG7.Domain
             return true;
            
         }
+        public async Task<MobileServiceCollection<TravelList, TravelList>> GetUserDestinations() {
+            return await user.getDestinations();
+            
+        }
 
     }
 

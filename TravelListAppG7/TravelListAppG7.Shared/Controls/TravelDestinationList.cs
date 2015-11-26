@@ -1,5 +1,6 @@
 ﻿using Windows.UI.Xaml.Controls;
 using TravelListAppG7.Domain;
+using Windows.UI.Xaml.Data;
 
 namespace TravelListAppG7.Controls
 {
@@ -11,6 +12,11 @@ namespace TravelListAppG7.Controls
         {
             this.InitializeComponent();
             dc = DomainController.Instance;
+            fillContext();
+        }
+        public async void fillContext() {
+            
+            this.DataContext = new CollectionViewSource { Source = await dc.GetUserDestinations() };
         }
                 
     }

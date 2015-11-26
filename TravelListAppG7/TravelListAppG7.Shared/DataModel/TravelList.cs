@@ -17,6 +17,8 @@ namespace TravelListAppG7.DataModel
         [JsonProperty(PropertyName = "year")]
 
         public int Year { get; set; }
-        
+        [JsonProperty(PropertyName = "userId")]
+        public string UserId { get; set; }
+
     }
 }

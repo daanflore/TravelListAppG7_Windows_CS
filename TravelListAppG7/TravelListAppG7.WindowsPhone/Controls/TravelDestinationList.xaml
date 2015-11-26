@@ -10,8 +10,9 @@
     <Page.Resources>
         <DataTemplate x:Name="myTemplate">
             <StackPanel>
-                <TextBlock Text="{Binding Name}"/>
-                <TextBlock Text="{Binding Score}"/>
+                <TextBlock Text="{Binding Destination}"/>
+                <TextBlock Text="{Binding Season}"/>
+                <TextBlock Text="{Binding Year}"/>
                 <Line Stroke="Green" X1="0" X2="300" Y1="25" Y2="25"/>
             </StackPanel>
         </DataTemplate>
@@ -38,7 +39,7 @@
 
         <!--TODO: Content should be placed within the following grid-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <ListBox ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" Height="314" Canvas.Top="10" Width="500" />
+            <ListBox ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}"/>
 
         </Grid>
     </Grid>
