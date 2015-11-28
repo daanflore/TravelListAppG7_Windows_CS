@@ -38,9 +38,49 @@
         </StackPanel>
 
         <!--TODO: Content should be placed within the following grid-->
+        
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <ListBox ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}"/>
-
+            <Canvas x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                <ListBox x:Name="DestinationList"   ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" DoubleTapped="ListBox_DoubleTapped"/>
+                <StackPanel Height="151" Width="446" Canvas.Top="400">
+                 <Button Content="Show Popup (using Offset)" Click="ShowPopupOffsetClicked" />
+                </StackPanel>
+             </Canvas>
         </Grid>
+        <Popup   x:Name="StandardPopup" >
+            <Border x:Name="test" BorderBrush="{StaticResource ApplicationForegroundThemeBrush}" 
+                Background="{StaticResource ApplicationPageBackgroundThemeBrush}"
+                BorderThickness="2" Width="200" Height="300">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <Grid.ChildrenTransitions>
+                        <TransitionCollection>
+                            <EntranceThemeTransition/>
+                        </TransitionCollection>
+                    </Grid.ChildrenTransitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Name" FontSize="24.667" HorizontalAlignment="Center" />
+                    <TextBox Grid.Row="0" Grid.Column="1" Name="TextUsername" Text="" />
+                    <TextBox Grid.Row="1" Grid.Column="1" Name="UserName" Text="" />
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Destination" FontSize="24.667" HorizontalAlignment="Center" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Date" FontSize="24.667" HorizontalAlignment="Center" />
+
+                    <Button Grid.Row="2" Grid.Column="0" Content="Close" Click="ClosePopupClicked" HorizontalAlignment="Center" />
+                </Grid>
+            </Border>
+        </Popup>
+
+
+
+
     </Grid>
 </Page>

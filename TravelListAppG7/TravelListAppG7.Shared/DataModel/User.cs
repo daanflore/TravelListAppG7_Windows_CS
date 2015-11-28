@@ -19,7 +19,12 @@ namespace TravelListAppG7.DataModel
         public async Task<MobileServiceCollection<TravelList, TravelList>> getDestinations()
         {
             travelList = await userTable.Where(u => u.UserId == Id).ToCollectionAsync();
+            DateTime day = DateTime.Today;
             return travelList;
+        }
+        public async void addTravelList(TravelList travelList) {
+            await userTable.InsertAsync(travelList);
+            this.travelList.Add(travelList);
         }
 
 

@@ -25,6 +25,7 @@ namespace TravelListAppG7.Controls
     /// </summary>
     public sealed partial class TravelDestinationList : Page
     {
+
     }
         
 }

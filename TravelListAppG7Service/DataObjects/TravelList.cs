@@ -1,4 +1,5 @@
 ﻿using Microsoft.WindowsAzure.Mobile.Service;
+using System;
 using System.Collections.Generic;
 
 namespace TravelListAppG7Service.DataObjects
@@ -8,7 +9,6 @@ namespace TravelListAppG7Service.DataObjects
         public string UserId { get; set; }
         public string Destination { get; set; }
         public string Season { get; set; }
-        public int Year { get; set; }
-        public ICollection<Categorie> PackingList { get; set; }
+        public DateTime day { get; set; }
     }
 }
