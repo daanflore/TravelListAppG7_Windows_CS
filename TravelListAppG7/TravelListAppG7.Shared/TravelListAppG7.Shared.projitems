@@ -14,6 +14,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\CategorieList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\HomePage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\PackingList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\TravelDestinationList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\Categorie.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\PackingItem.cs" />

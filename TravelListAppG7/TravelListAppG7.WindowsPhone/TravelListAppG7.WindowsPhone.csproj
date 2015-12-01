@@ -92,6 +92,9 @@
     <Compile Include="Controls\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PackingList.xaml.cs">
+      <DependentUpon>PackingList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TravelDestinationList.xaml.cs">
       <DependentUpon>TravelDestinationList.xaml</DependentUpon>
     </Compile>
@@ -123,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PackingList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -25,11 +25,11 @@ namespace TravelListAppG7.Controls
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CategorieList : Page
+    public sealed partial class PackingList : Page
     {
         private DomainController dc;
-        
-        public CategorieList()
+
+        public PackingList()
         {
             this.InitializeComponent();
             dc = DomainController.Instance;
@@ -43,8 +43,8 @@ namespace TravelListAppG7.Controls
         }
         private void ListBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            Categorie selected = CategorieDetailList.SelectedItem as Categorie;
-            dc.categorie= selected;
+            //Categorie selected = CategorieDetailList.SelectedItem as Categorie;
+            //dc.categorie = selected;
             Frame.Navigate(typeof(CategorieList));
         }
         private void ClosePopupClicked(object sender, RoutedEventArgs e)
@@ -74,6 +74,9 @@ namespace TravelListAppG7.Controls
             cancel.IsEnabled = true;
             StandardPopup.IsOpen = false;
         }
+        private void CheckBoxComplete_Checked(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }
