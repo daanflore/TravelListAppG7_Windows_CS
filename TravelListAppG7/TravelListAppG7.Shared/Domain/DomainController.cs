@@ -40,6 +40,12 @@ namespace TravelListAppG7.Domain
             
             
         }
+
+        public async Task<MobileServiceCollection<PackingItem, PackingItem>> GetCategoriePacking()
+        {
+            return await categorie.getPackingItems();
+        }
+
         public async Task<bool> Login(string username, string password)  {
             if (username == null || username.Trim().Equals("") || password == null || password.Trim().Equals(""))
             {

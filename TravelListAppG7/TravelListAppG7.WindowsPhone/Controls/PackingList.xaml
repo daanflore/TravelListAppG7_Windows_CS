@@ -10,7 +10,8 @@
     <Page.Resources>
         <DataTemplate x:Name="myTemplate">
             <StackPanel>
-                <TextBlock Text="{Binding Name}"/>
+                <CheckBox Name="CheckBoxComplete" IsChecked="{Binding Packed, Mode=TwoWay}" Checked="CheckBoxComplete_Checked" Content="{Binding Name}" Margin="10,5" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding Amount}"/>
                 <Line Stroke="Green" X1="0" X2="300" Y1="25" Y2="25"/>
             </StackPanel>
         </DataTemplate>
@@ -40,18 +41,10 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            
             <Button Grid.Row="0" Content="Add new Categorie" Click="ShowPopupOffsetClicked" />
-            <ListView  Grid.Row="4" Grid.ColumnSpan="2" Name="ListItems">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <CheckBox Name="CheckBoxComplete" IsChecked="{Binding Packed, Mode=TwoWay}" Checked="CheckBoxComplete_Checked" Content="{Binding name}" Margin="10,5" VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding Amaunt}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
+            <ListBox Grid.Row="1" x:Name="CategorieDetailList"   ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" DoubleTapped="ListBox_DoubleTapped"/>
+            
 
         </Grid>
         <Popup   x:Name="StandardPopup" >

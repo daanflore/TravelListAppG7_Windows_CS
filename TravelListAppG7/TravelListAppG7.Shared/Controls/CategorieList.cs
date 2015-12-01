@@ -45,7 +45,7 @@ namespace TravelListAppG7.Controls
         {
             Categorie selected = CategorieDetailList.SelectedItem as Categorie;
             dc.categorie= selected;
-            Frame.Navigate(typeof(CategorieList));
+            Frame.Navigate(typeof(PackingList));
         }
         private void ClosePopupClicked(object sender, RoutedEventArgs e)
         {

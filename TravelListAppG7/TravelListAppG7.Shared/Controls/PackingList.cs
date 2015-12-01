@@ -38,8 +38,8 @@ namespace TravelListAppG7.Controls
 
         public async void fillContext()
         {
-
-            this.DataContext = new CollectionViewSource { Source = await dc.GetTravelListCategorie() };
+            var contextzelf =await dc.GetCategoriePacking();
+            this.DataContext = new CollectionViewSource { Source = await dc.GetCategoriePacking() };
         }
         private void ListBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
