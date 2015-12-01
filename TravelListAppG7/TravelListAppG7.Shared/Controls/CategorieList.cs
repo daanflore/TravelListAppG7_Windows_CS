@@ -43,14 +43,14 @@ namespace TravelListAppG7.Controls
         }
         private void ListBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            Categorie selected = DestinationList.SelectedItem as Categorie;
-            //dc.destination = selected;
+            Categorie selected = CategorieDetailList.SelectedItem as Categorie;
+            dc.categorie= selected;
             Frame.Navigate(typeof(CategorieList));
         }
         private void ClosePopupClicked(object sender, RoutedEventArgs e)
         {
             // if the Popup is open, then close it
-            TxtDestination.Text = "";
+            TxtCategorie.Text = "";
             StandardPopup.IsOpen = false;
         }
 
@@ -68,7 +68,8 @@ namespace TravelListAppG7.Controls
         {
             add.IsEnabled = false;
             cancel.IsEnabled = false;
-            TxtDestination.Text = "";
+            dc.addCategorie(new Categorie { Name = TxtCategorie.Text });
+            TxtCategorie.Text = "";
             add.IsEnabled = true;
             cancel.IsEnabled = true;
             StandardPopup.IsOpen = false;

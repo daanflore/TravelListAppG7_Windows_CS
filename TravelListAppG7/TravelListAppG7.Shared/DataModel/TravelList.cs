@@ -27,5 +27,12 @@ namespace TravelListAppG7.DataModel
             categorieList = await categorieTable.Where(i=>i.TravelListId==this.Id).ToCollectionAsync();
             return categorieList;
         }
+
+        public async void addCategorie(Categorie categorie)
+        {
+            categorie.TravelListId = this.Id;
+            await categorieTable.InsertAsync(categorie);
+            categorieList.Add(categorie);
+        }
     }
 }

@@ -65,6 +65,9 @@ namespace TravelListAppG7.Domain
             return await destination.getTravelLists();
 
         }
+        public void addCategorie(Categorie categorie) {
+            destination.addCategorie(categorie);
+        }
 
     }
 

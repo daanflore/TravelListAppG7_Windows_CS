@@ -7,8 +7,10 @@ namespace TravelListAppG7.DataModel
     public class PackingItem
     {
         public string Id { get; set; }
-        private string name;
-        private int amount;
+        public string CategorieId { get; set; }
+        public string Name { get; set; }
+        public int Amount { get; set; }
+        public bool Packed { get; set; }
 
     }
 }

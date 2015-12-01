@@ -40,8 +40,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Content="Add new Destination" Click="ShowPopupOffsetClicked" />
-            <ListBox Grid.Row="1" x:Name="DestinationList"   ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" DoubleTapped="ListBox_DoubleTapped"/>
+            <Button Grid.Row="0" Content="Add new Categorie" Click="ShowPopupOffsetClicked" />
+            <ListBox Grid.Row="1" x:Name="CategorieDetailList"   ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" DoubleTapped="ListBox_DoubleTapped"/>
 
 
         </Grid>
@@ -65,12 +65,10 @@
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Row="0" Grid.Column="1" Name="TxtDestination" Text="" />
-                    <DatePicker Grid.Row="1" Grid.Column="1" x:Name="DatePicker" />
-
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Destination" FontSize="24.667" HorizontalAlignment="Center" />
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Date" FontSize="24.667" HorizontalAlignment="Center" />
-
+                    <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Categorie Name" FontSize="24.667" HorizontalAlignment="Center" />
+                    <TextBox Grid.Row="1" Grid.ColumnSpan="2" Name="TxtCategorie" Text="" />
+                    
+                    
                     <Button x:Name="cancel" Grid.Row="2" Grid.Column="1" Content="Cancle" Click="ClosePopupClicked" HorizontalAlignment="Center" />
                     <Button x:Name="add" Grid.Row="2" Grid.Column="0" Content="Add" Click="ButtonAdd_Click" HorizontalAlignment="Center" />
 
