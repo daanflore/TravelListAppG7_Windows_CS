@@ -15,6 +15,7 @@ namespace TravelListAppG7.Domain
         private static DomainController instance;
         public User user { get; set; }
         public TravelList destination { get; set; }
+        public Categorie categorie { get; set; }
         private DomainController() { }
 
         public static DomainController Instance
@@ -58,6 +59,11 @@ namespace TravelListAppG7.Domain
         }
         public void addTravelDestination(TravelList travelList) {
             user.addTravelList(travelList);
+        }
+        public async Task<MobileServiceCollection<Categorie, Categorie>> GetTravelListCategorie()
+        {
+            return await destination.getTravelLists();
+
         }
 
     }

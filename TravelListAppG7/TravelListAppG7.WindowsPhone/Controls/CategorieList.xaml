@@ -7,7 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Page.Resources>
+        <DataTemplate x:Name="myTemplate">
+            <StackPanel>
+                <TextBlock Text="{Binding Name}"/>
+                <Line Stroke="Green" X1="0" X2="300" Y1="25" Y2="25"/>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
     <Grid x:Name="LayoutRoot">
 
         <Grid.ChildrenTransitions>
@@ -29,7 +36,46 @@
 
         <!--TODO: Content should be placed within the following grid-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Content="Add new Destination" Click="ShowPopupOffsetClicked" />
+            <ListBox Grid.Row="1" x:Name="DestinationList"   ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" DoubleTapped="ListBox_DoubleTapped"/>
+
 
         </Grid>
+        <Popup   x:Name="StandardPopup" >
+            <Border x:Name="test" BorderBrush="{StaticResource ApplicationForegroundThemeBrush}" 
+                Background="{StaticResource ApplicationPageBackgroundThemeBrush}"
+                BorderThickness="0">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <Grid.ChildrenTransitions>
+                        <TransitionCollection>
+                            <EntranceThemeTransition/>
+                        </TransitionCollection>
+                    </Grid.ChildrenTransitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Row="0" Grid.Column="1" Name="TxtDestination" Text="" />
+                    <DatePicker Grid.Row="1" Grid.Column="1" x:Name="DatePicker" />
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Destination" FontSize="24.667" HorizontalAlignment="Center" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Date" FontSize="24.667" HorizontalAlignment="Center" />
+
+                    <Button x:Name="cancel" Grid.Row="2" Grid.Column="1" Content="Cancle" Click="ClosePopupClicked" HorizontalAlignment="Center" />
+                    <Button x:Name="add" Grid.Row="2" Grid.Column="0" Content="Add" Click="ButtonAdd_Click" HorizontalAlignment="Center" />
+
+                </Grid>
+            </Border>
+        </Popup>
     </Grid>
 </Page>

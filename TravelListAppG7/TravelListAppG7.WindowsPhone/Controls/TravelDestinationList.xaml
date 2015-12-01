@@ -39,12 +39,14 @@
         <!--TODO: Content should be placed within the following grid-->
         
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <Canvas x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-                <ListBox x:Name="DestinationList"   ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" DoubleTapped="ListBox_DoubleTapped"/>
-                <StackPanel Height="151" Width="446" Canvas.Top="400">
-                 <Button Content="Add new Destination" Click="ShowPopupOffsetClicked" />
-                </StackPanel>
-             </Canvas>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Content="Add new Destination" Click="ShowPopupOffsetClicked" />
+            <ListBox Grid.Row="1" x:Name="DestinationList"   ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" DoubleTapped="ListBox_DoubleTapped"/>
+                  
+
         </Grid>
         <Popup   x:Name="StandardPopup" >
             <Border x:Name="test" BorderBrush="{StaticResource ApplicationForegroundThemeBrush}" 
@@ -78,8 +80,6 @@
                 </Grid>
             </Border>
         </Popup>
-
-
 
 
     </Grid>
