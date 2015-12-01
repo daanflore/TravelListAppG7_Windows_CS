@@ -23,8 +23,10 @@ namespace TravelListAppG7.DataModel
             return travelList;
         }
         public async void addTravelList(TravelList travelList) {
+            travelList.UserId = this.Id;
             await userTable.InsertAsync(travelList);
             this.travelList.Add(travelList);
+            if (travelList == null) { }
         }
 
 

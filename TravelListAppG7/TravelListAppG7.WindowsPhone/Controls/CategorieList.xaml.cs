@@ -23,9 +23,8 @@ namespace TravelListAppG7.Controls
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class TravelDestinationList : Page
+    public sealed partial class CategorieList : Page
     {
-       
-    }
         
+    }
 }

@@ -8,15 +8,13 @@ namespace TravelListAppG7.DataModel
     public class TravelList
     {
         public string Id { get; set; }
+
         [JsonProperty(PropertyName = "destination")]
-
         public string Destination { get; set; }
-        [JsonProperty(PropertyName = "season")]
-
-        public string Season { get; set; }
+        
         [JsonProperty(PropertyName = "day")]
+        public DateTime Day { get; set; }
 
-        public DateTime day { get; set; }
         [JsonProperty(PropertyName = "userId")]
         public string UserId { get; set; }
 

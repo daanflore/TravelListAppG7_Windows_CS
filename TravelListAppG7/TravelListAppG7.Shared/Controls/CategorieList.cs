@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using TravelListAppG7.Domain;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -23,9 +24,14 @@ namespace TravelListAppG7.Controls
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class TravelDestinationList : Page
+    public sealed partial class CategorieList : Page
     {
-       
-    }
+        private DomainController dc;
         
+        public CategorieList()
+        {
+            this.InitializeComponent();
+            dc = DomainController.Instance;
+        }
+    }
 }

@@ -8,7 +8,6 @@ namespace TravelListAppG7Service.DataObjects
     {
         public string UserId { get; set; }
         public string Destination { get; set; }
-        public string Season { get; set; }
-        public DateTime day { get; set; }
+        public DateTime Day { get; set; }
     }
 }

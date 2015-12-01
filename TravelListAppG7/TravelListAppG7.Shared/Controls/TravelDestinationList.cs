@@ -27,25 +27,35 @@ namespace TravelListAppG7.Controls
         {
             TravelList selected = DestinationList.SelectedItem as TravelList;
             dc.destination = selected;
+            Frame.Navigate(typeof(CategorieList));
         }
         private void ClosePopupClicked(object sender, RoutedEventArgs e)
         {
-            // if the Popup is open, then close it 
-            StandardPopup.HorizontalOffset = (Window.Current.Bounds.Width - test.ActualWidth) / 2;
-            StandardPopup.VerticalOffset = (Window.Current.Bounds.Height - test.ActualHeight) / 2;
+            // if the Popup is open, then close it
+            TxtDestination.Text = "";
             StandardPopup.IsOpen = false;
         }
 
         // Handles the Click event on the Button on the page and opens the Popup. 
         private void ShowPopupOffsetClicked(object sender, RoutedEventArgs e)
         {
-            test.Width = Window.Current.Bounds.Width / 100 * 80;
-            test.Height = Window.Current.Bounds.Height / 100 * 80;
+            test.Width = Window.Current.Bounds.Width;
+            test.Height = Window.Current.Bounds.Height;
             StandardPopup.HorizontalOffset = (Window.Current.Bounds.Width - test.Width) / 2;
             StandardPopup.VerticalOffset = (Window.Current.Bounds.Height - test.Height) / 2;
             StandardPopup.IsOpen = true;
 
         }
-
+        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            add.IsEnabled=false;
+            cancel.IsEnabled = false;
+            TravelList travelList = new TravelList { Destination = TxtDestination.Text,Day=DatePicker.Date.DateTime };
+            dc.addTravelDestination(travelList);
+            TxtDestination.Text = "";
+            add.IsEnabled = true;
+            cancel.IsEnabled = true;
+            StandardPopup.IsOpen = false;
+        }
     }
 }

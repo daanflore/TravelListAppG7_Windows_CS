@@ -56,6 +56,9 @@ namespace TravelListAppG7.Domain
             return await user.getDestinations();
             
         }
+        public void addTravelDestination(TravelList travelList) {
+            user.addTravelList(travelList);
+        }
 
     }
 
