@@ -5,6 +5,8 @@ using Windows.UI.Xaml.Input;
 using TravelListAppG7.DataModel;
 using Windows.UI.Xaml;
 using System.Diagnostics;
+using System;
+using Windows.UI.Popups;
 
 namespace TravelListAppG7.Controls
 {
@@ -14,8 +16,8 @@ namespace TravelListAppG7.Controls
         private DomainController dc;
         public TravelDestinationList()
         {
-            this.InitializeComponent();
             dc = DomainController.Instance;
+            this.InitializeComponent();
             fillContext();
         }
         public async void fillContext() {
@@ -46,16 +48,26 @@ namespace TravelListAppG7.Controls
             StandardPopup.IsOpen = true;
 
         }
-        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        private async void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
-            add.IsEnabled=false;
-            cancel.IsEnabled = false;
-            TravelList travelList = new TravelList { Destination = TxtDestination.Text,Day=DatePicker.Date.DateTime };
-            dc.addTravelDestination(travelList);
-            TxtDestination.Text = "";
-            add.IsEnabled = true;
-            cancel.IsEnabled = true;
-            StandardPopup.IsOpen = false;
+            try
+            {
+                add.IsEnabled = false;
+                cancel.IsEnabled = false;
+                TravelList travelList = new TravelList { Destination = TxtDestination.Text, Day = DatePicker.Date.DateTime };
+                dc.addTravelDestination(travelList);
+                TxtDestination.Text = "";
+                StandardPopup.IsOpen = false;
+            }
+            catch (ArgumentException ex)
+            {
+                MessageDialog msgbox = new MessageDialog(ex.Message);
+                await msgbox.ShowAsync();
+            }
+            finally {
+                add.IsEnabled = true;
+                cancel.IsEnabled = true;
+            }
         }
     }
 }

@@ -11,6 +11,8 @@
         <DataTemplate x:Name="myTemplate">
             <StackPanel>
                 <TextBlock Text="{Binding Name}"/>
+                <TextBlock Text="{Binding CompletedPercentage}"/>
+                
                 <Line Stroke="Green" X1="0" X2="300" Y1="25" Y2="25"/>
             </StackPanel>
         </DataTemplate>

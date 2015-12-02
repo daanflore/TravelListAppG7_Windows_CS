@@ -11,13 +11,39 @@ namespace TravelListAppG7.DataModel
     {
         private MobileServiceCollection<Categorie, Categorie> categorieList;
         private IMobileServiceTable<Categorie> categorieTable = App.MobileService.GetTable<Categorie>();
+        private String destination;
+        private DateTime day; 
         public string Id { get; set; }
 
         [JsonProperty(PropertyName = "destination")]
-        public string Destination { get; set; }
+        public string Destination {
+            get {
+                return destination;
+            }
+            set {
+                if (value == null || value.Equals(""))
+                {
+                    throw new ArgumentException("A destiantion cannot be empty");
+                }
+                else {
+                    this.destination = value;
+                }
+            }
+        }
         
         [JsonProperty(PropertyName = "day")]
-        public DateTime Day { get; set; }
+        public DateTime Day { get{
+                return day.Date; 
+                } set {
+                if (value.Date < new DateTime().Date)
+                {
+                    throw new ArgumentException("Travel date can't be in the past");
+                }
+                else {
+                    day = value;
+                }
+            }
+        }
 
         [JsonProperty(PropertyName = "userId")]
         public string UserId { get; set; }
@@ -33,6 +59,11 @@ namespace TravelListAppG7.DataModel
             categorie.TravelListId = this.Id;
             await categorieTable.InsertAsync(categorie);
             categorieList.Add(categorie);
+        }
+
+        public async void updateCategorie(Categorie categorie)
+        {
+            await categorieTable.UpdateAsync(categorie);
         }
     }
 }

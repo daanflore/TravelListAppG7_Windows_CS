@@ -7,6 +7,7 @@ namespace TravelListAppG7Service.DataObjects
     {
         public string TravelListId { get; set; }
         public string name { get; set; }
-
+        public int Amount { get; set; }
+        public int AmountCompleted { get; set; }
     }
 }

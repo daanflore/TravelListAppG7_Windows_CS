@@ -84,6 +84,7 @@ namespace TravelListAppG7.Domain
         public void updatePackingItem(PackingItem item)
         {
             categorie.updatePackingItem(item);
+            destination.updateCategorie(categorie);
         }
     }
 

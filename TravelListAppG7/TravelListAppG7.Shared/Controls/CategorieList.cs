@@ -31,15 +31,15 @@ namespace TravelListAppG7.Controls
         
         public CategorieList()
         {
-            this.InitializeComponent();
             dc = DomainController.Instance;
+            this.InitializeComponent();
             fillContext();
         }
 
         public async void fillContext()
         {
-
-            this.DataContext = new CollectionViewSource { Source = await dc.GetTravelListCategorie() };
+  
+            this.DataContext = new CollectionViewSource { Source = await dc.GetTravelListCategorie()};
         }
         private void ListBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
