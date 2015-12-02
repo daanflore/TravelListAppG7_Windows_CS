@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using TravelListAppG7.Domain;
 using TravelListAppG7.DataModel;
+using System.Diagnostics;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -50,7 +51,7 @@ namespace TravelListAppG7.Controls
         private void ClosePopupClicked(object sender, RoutedEventArgs e)
         {
             // if the Popup is open, then close it
-            TxtCategorie.Text = "";
+            TxtItem.Text = "";
             StandardPopup.IsOpen = false;
         }
 
@@ -68,15 +69,20 @@ namespace TravelListAppG7.Controls
         {
             add.IsEnabled = false;
             cancel.IsEnabled = false;
-            dc.addCategorie(new Categorie { Name = TxtCategorie.Text });
-            TxtCategorie.Text = "";
+            dc.addPackingItem(new PackingItem { Name = TxtItem.Text });
+            TxtItem.Text = "";
+            TxtAmount.Text = "";
             add.IsEnabled = true;
             cancel.IsEnabled = true;
             StandardPopup.IsOpen = false;
         }
-        private void CheckBoxComplete_Checked(object sender, RoutedEventArgs e)
-        {
 
+        private void CheckBoxComplete_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox cb = (CheckBox)sender;
+            PackingItem item = cb.DataContext as PackingItem;
+            dc.updatePackingItem(item);
+            Debug.WriteLine(item.Packed);
         }
     }
 }

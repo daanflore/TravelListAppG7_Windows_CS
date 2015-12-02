@@ -27,5 +27,17 @@ namespace TravelListAppG7.DataModel
             packingList = await PackingTable.Where(i => i.CategorieId == this.Id).ToCollectionAsync();
             return packingList;
         }
+
+        public async void updatePackingItem(PackingItem item)
+        {
+            await PackingTable.UpdateAsync(item);
+        }
+
+        public async void addPackingItem(PackingItem packingItem)
+        {
+            packingItem.CategorieId= this.Id;
+            await PackingTable.InsertAsync(packingItem);
+            packingList.Add(packingItem);
+        }
     }
 }

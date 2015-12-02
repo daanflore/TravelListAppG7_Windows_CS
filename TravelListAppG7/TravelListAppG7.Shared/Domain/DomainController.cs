@@ -71,10 +71,20 @@ namespace TravelListAppG7.Domain
             return await destination.getTravelLists();
 
         }
+
+        public void addPackingItem(PackingItem packingItem)
+        {
+            categorie.addPackingItem(packingItem);
+        }
+
         public void addCategorie(Categorie categorie) {
             destination.addCategorie(categorie);
         }
 
+        public void updatePackingItem(PackingItem item)
+        {
+            categorie.updatePackingItem(item);
+        }
     }
 
 }

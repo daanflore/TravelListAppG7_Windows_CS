@@ -10,7 +10,7 @@
     <Page.Resources>
         <DataTemplate x:Name="myTemplate">
             <StackPanel>
-                <CheckBox Name="CheckBoxComplete" IsChecked="{Binding Packed, Mode=TwoWay}" Checked="CheckBoxComplete_Checked" Content="{Binding Name}" Margin="10,5" VerticalAlignment="Center"/>
+                <CheckBox Name="CheckBoxComplete" IsChecked="{Binding Packed, Mode=TwoWay}" Content="{Binding Name}" Margin="10,5" VerticalAlignment="Center" Click="CheckBoxComplete_Click"/>
                 <TextBlock Text="{Binding Amount}"/>
                 <Line Stroke="Green" X1="0" X2="300" Y1="25" Y2="25"/>
             </StackPanel>
@@ -42,7 +42,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
-            <Button Grid.Row="0" Content="Add new Categorie" Click="ShowPopupOffsetClicked" />
+            <Button Grid.Row="0" Content="Add new Item" Click="ShowPopupOffsetClicked" />
             <ListBox Grid.Row="1" x:Name="CategorieDetailList"   ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" DoubleTapped="ListBox_DoubleTapped"/>
             
 
@@ -67,8 +67,10 @@
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Categorie Name" FontSize="24.667" HorizontalAlignment="Center" />
-                    <TextBox Grid.Row="1" Grid.ColumnSpan="2" Name="TxtCategorie" Text="" />
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Item" FontSize="24.667" HorizontalAlignment="Center" />
+                    <TextBox Grid.Row="0" Grid.Column="1" Name="TxtItem" Text="" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Amount" FontSize="24.667" HorizontalAlignment="Center" />
+                    <TextBox Grid.Row="1" Grid.Column="1" Name="TxtAmount" Text="" />
 
 
                     <Button x:Name="cancel" Grid.Row="2" Grid.Column="1" Content="Cancle" Click="ClosePopupClicked" HorizontalAlignment="Center" />
