@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.WindowsAzure.MobileServices;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace TravelListAppG7.DataModel
 {
@@ -63,7 +64,8 @@ namespace TravelListAppG7.DataModel
 
         public async void updateCategorie(Categorie categorie)
         {
-            await categorieTable.UpdateAsync(categorie);
+            Debug.WriteLine(categorie.Amount);
+             await categorieTable.UpdateAsync(categorie);
         }
     }
 }

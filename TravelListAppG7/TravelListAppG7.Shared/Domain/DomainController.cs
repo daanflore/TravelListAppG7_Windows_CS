@@ -1,6 +1,7 @@
 ﻿using Microsoft.WindowsAzure.MobileServices;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,18 +73,20 @@ namespace TravelListAppG7.Domain
 
         }
 
-        public void addPackingItem(PackingItem packingItem)
+        public async void addPackingItem(PackingItem packingItem)
         {
-            categorie.addPackingItem(packingItem);
+            await categorie.addPackingItem(packingItem);
+            Debug.WriteLine(categorie.Amount);
+            destination.updateCategorie(categorie);
         }
 
         public void addCategorie(Categorie categorie) {
             destination.addCategorie(categorie);
         }
 
-        public void updatePackingItem(PackingItem item)
+        public async void updatePackingItem(PackingItem item)
         {
-            categorie.updatePackingItem(item);
+            Debug.WriteLine(categorie.Amount);
             destination.updateCategorie(categorie);
         }
     }

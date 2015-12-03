@@ -35,18 +35,15 @@ namespace TravelListAppG7.DataModel
             }
         }
 
-        public Double CompletedPercentage {
+        public String CompletedPercentage {
             get {
-                if (Amount == 0) {
-                    return 0;
-                }
-                return AmountCompleted / Amount * 100;
+                return String.Format("{0}/{1}",AmountCompleted,Amount);
                 
             }
         }
         [JsonProperty(PropertyName = "amount")]
         public int Amount { get; set; }
-        [JsonProperty(PropertyName = "completed")]
+        [JsonProperty(PropertyName = "amountcompleted")]
         public int AmountCompleted { get; set; }
 
         public async Task<MobileServiceCollection<PackingItem, PackingItem>> getPackingItems()
@@ -69,12 +66,14 @@ namespace TravelListAppG7.DataModel
             await PackingTable.UpdateAsync(item);
         }
 
-        public async void addPackingItem(PackingItem packingItem)
+        public async Task<bool> addPackingItem(PackingItem packingItem)
         {
+           
             packingItem.CategorieId= this.Id;
             await PackingTable.InsertAsync(packingItem);
             packingList.Add(packingItem);
-            Amount++;
+            return true;
+            
         }
       
  }
