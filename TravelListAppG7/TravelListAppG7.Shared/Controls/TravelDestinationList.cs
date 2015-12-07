@@ -32,6 +32,7 @@ namespace TravelListAppG7.Controls
         {
             TravelList selected = DestinationList.SelectedItem as TravelList;
             dc.destination = selected;
+            HardwareButtons.BackPressed -= OnBackPressed;
             Frame.Navigate(typeof(CategorieList));
         }
         private void ClosePopupClicked(object sender, RoutedEventArgs e)
@@ -83,6 +84,7 @@ namespace TravelListAppG7.Controls
             }
             else
             {
+                HardwareButtons.BackPressed -= OnBackPressed;
                 Frame.Navigate(typeof(HomePage));
             }
         }

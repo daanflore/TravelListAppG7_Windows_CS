@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Navigation;
 using TravelListAppG7.DataModel;
 using TravelListAppG7.Domain;
 using TravelListAppG7.Controls;
+using Windows.Phone.UI.Input;
 
 namespace TravelListAppG7
 {
@@ -20,6 +21,7 @@ namespace TravelListAppG7
         public MainPage()
         {
             this.InitializeComponent();
+            HardwareButtons.BackPressed += OnBackPressed;
             dc = DomainController.Instance;
         }
 
@@ -32,6 +34,7 @@ namespace TravelListAppG7
                 ButtonRegister.IsEnabled = false;
                 var userItem = new User { Username = TextUsername.Text, Password = TextPassword.Text };
                 await dc.Register(userItem);
+                HardwareButtons.BackPressed -= OnBackPressed;
                 Frame.Navigate(typeof(HomePage));
             }
             catch (Exception ex) {
@@ -51,6 +54,7 @@ namespace TravelListAppG7
                 ButtonLogin.IsEnabled = false;
                 ButtonRegister.IsEnabled = false;
                 await dc.Login(TextUsername.Text, TextPassword.Text);
+                HardwareButtons.BackPressed -= OnBackPressed;
                 Frame.Navigate(typeof(HomePage));
             }
             catch (Exception ex)
@@ -62,6 +66,13 @@ namespace TravelListAppG7
                 ButtonLogin.IsEnabled = true;
                 ButtonRegister.IsEnabled = true;
             }
+        }
+        private async void OnBackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
+        {
+            e.Handled = true;
+            HardwareButtons.BackPressed -= OnBackPressed;
+            // add your own code here to run when Back is pressed
+            Application.Current.Exit();
         }
 
     }

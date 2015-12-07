@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Navigation;
 using TravelListAppG7.Domain;
 using TravelListAppG7.DataModel;
 using System.Diagnostics;
+using Windows.Phone.UI.Input;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -34,6 +35,7 @@ namespace TravelListAppG7.Controls
         {
             this.InitializeComponent();
             dc = DomainController.Instance;
+            HardwareButtons.BackPressed += OnBackPressed;
             fillContext();
         }
 
@@ -90,6 +92,20 @@ namespace TravelListAppG7.Controls
             PackingItem item = cb.DataContext as PackingItem;
             dc.updatePackingItem(item);
             Debug.WriteLine(item.Packed);
+        }
+        private async void OnBackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
+        {
+            e.Handled = true;
+            // add your own code here to run when Back is pressed
+            if (StandardPopup.IsOpen)
+            {
+                StandardPopup.IsOpen = false;
+            }
+            else
+            {
+                HardwareButtons.BackPressed -= OnBackPressed;
+                Frame.Navigate(typeof(CategorieList));
+            }
         }
     }
 }
