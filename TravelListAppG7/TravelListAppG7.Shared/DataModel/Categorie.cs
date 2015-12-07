@@ -52,7 +52,7 @@ namespace TravelListAppG7.DataModel
             return packingList;
         }
 
-        public async void updatePackingItem(PackingItem item)
+        public async Task<bool> updatePackingItem(PackingItem item)
         {
             if (item.Packed == true)
             {
@@ -64,11 +64,12 @@ namespace TravelListAppG7.DataModel
             }
             
             await PackingTable.UpdateAsync(item);
+            return true;
         }
 
         public async Task<bool> addPackingItem(PackingItem packingItem)
         {
-           
+            Amount++;
             packingItem.CategorieId= this.Id;
             await PackingTable.InsertAsync(packingItem);
             packingList.Add(packingItem);

@@ -5,8 +5,10 @@ using Windows.UI.Xaml.Input;
 using TravelListAppG7.DataModel;
 using Windows.UI.Xaml;
 using System.Diagnostics;
+using Windows.Phone.UI.Input;
 using System;
 using Windows.UI.Popups;
+using System.ComponentModel;
 
 namespace TravelListAppG7.Controls
 {
@@ -18,6 +20,7 @@ namespace TravelListAppG7.Controls
         {
             dc = DomainController.Instance;
             this.InitializeComponent();
+            HardwareButtons.BackPressed += OnBackPressed;
             fillContext();
         }
         public async void fillContext() {
@@ -67,6 +70,20 @@ namespace TravelListAppG7.Controls
             finally {
                 add.IsEnabled = true;
                 cancel.IsEnabled = true;
+            }
+        }
+
+        private async void OnBackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
+        {
+            e.Handled = true;
+            // add your own code here to run when Back is pressed
+            if (StandardPopup.IsOpen)
+            {
+                StandardPopup.IsOpen = false;
+            }
+            else
+            {
+                Frame.Navigate(typeof(HomePage));
             }
         }
     }

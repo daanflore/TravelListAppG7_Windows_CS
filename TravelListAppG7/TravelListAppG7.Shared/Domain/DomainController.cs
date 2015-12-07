@@ -87,6 +87,8 @@ namespace TravelListAppG7.Domain
         public async void updatePackingItem(PackingItem item)
         {
             Debug.WriteLine(categorie.Amount);
+            await categorie.updatePackingItem(item);
+            Debug.WriteLine(categorie.AmountCompleted);
             destination.updateCategorie(categorie);
         }
     }

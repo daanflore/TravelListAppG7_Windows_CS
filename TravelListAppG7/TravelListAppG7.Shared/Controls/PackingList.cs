@@ -42,12 +42,7 @@ namespace TravelListAppG7.Controls
             var contextzelf =await dc.GetCategoriePacking();
             this.DataContext = new CollectionViewSource { Source = await dc.GetCategoriePacking() };
         }
-        private void ListBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
-        {
-            //Categorie selected = CategorieDetailList.SelectedItem as Categorie;
-            //dc.categorie = selected;
-            Frame.Navigate(typeof(CategorieList));
-        }
+
         private void ClosePopupClicked(object sender, RoutedEventArgs e)
         {
             // if the Popup is open, then close it
@@ -67,14 +62,26 @@ namespace TravelListAppG7.Controls
         }
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
-            add.IsEnabled = false;
-            cancel.IsEnabled = false;
-            dc.addPackingItem(new PackingItem { Name = TxtItem.Text });
-            TxtItem.Text = "";
-            TxtAmount.Text = "";
-            add.IsEnabled = true;
-            cancel.IsEnabled = true;
-            StandardPopup.IsOpen = false;
+            try
+            {
+                add.IsEnabled = false;
+                cancel.IsEnabled = false;
+                int amount;
+                int.TryParse(TxtAmount.Text, out amount);
+                Debug.WriteLine(amount);
+                dc.addPackingItem(new PackingItem { Name = TxtItem.Text, Amount = amount });
+                TxtItem.Text = "";
+                TxtAmount.Text = "";
+                StandardPopup.IsOpen = false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            finally {
+                add.IsEnabled = true;
+                cancel.IsEnabled = true;
+            }
         }
 
         private void CheckBoxComplete_Click(object sender, RoutedEventArgs e)

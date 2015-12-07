@@ -43,7 +43,7 @@
             </Grid.RowDefinitions>
             
             <Button Grid.Row="0" Content="Add new Item" Click="ShowPopupOffsetClicked" />
-            <ListBox Grid.Row="1" x:Name="CategorieDetailList"   ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" DoubleTapped="ListBox_DoubleTapped"/>
+            <ListBox Grid.Row="1" x:Name="CategorieDetailList"   ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" />
             
 
         </Grid>
@@ -70,7 +70,7 @@
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Item" FontSize="24.667" HorizontalAlignment="Center" />
                     <TextBox Grid.Row="0" Grid.Column="1" Name="TxtItem" Text="" />
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Amount" FontSize="24.667" HorizontalAlignment="Center" />
-                    <TextBox Grid.Row="1" Grid.Column="1" Name="TxtAmount" Text="" />
+                    <TextBox Grid.Row="1"  Grid.Column="1" Name="TxtAmount" Text="" />
 
 
                     <Button x:Name="cancel" Grid.Row="2" Grid.Column="1" Content="Cancle" Click="ClosePopupClicked" HorizontalAlignment="Center" />
