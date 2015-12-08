@@ -45,10 +45,10 @@ namespace TravelListAppG7.Controls
         // Handles the Click event on the Button on the page and opens the Popup. 
         private void ShowPopupOffsetClicked(object sender, RoutedEventArgs e)
         {
-            test.Width = Window.Current.Bounds.Width;
-            test.Height = Window.Current.Bounds.Height;
-            StandardPopup.HorizontalOffset = (Window.Current.Bounds.Width - test.Width) / 2;
-            StandardPopup.VerticalOffset = (Window.Current.Bounds.Height - test.Height) / 2;
+            PopupGrid.Width = Window.Current.Bounds.Width;
+            PopupGrid.Height = Window.Current.Bounds.Height;
+            StandardPopup.HorizontalOffset = (Window.Current.Bounds.Width - Window.Current.Bounds.Width) / 2;
+            StandardPopup.VerticalOffset = (Window.Current.Bounds.Height - Window.Current.Bounds.Height) / 2;
             StandardPopup.IsOpen = true;
 
         }

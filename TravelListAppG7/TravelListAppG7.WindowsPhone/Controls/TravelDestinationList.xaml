@@ -49,17 +49,15 @@
 
         </Grid>
         <Popup   x:Name="StandardPopup" >
-            <Border x:Name="test" BorderBrush="{StaticResource ApplicationForegroundThemeBrush}" 
-                Background="{StaticResource ApplicationPageBackgroundThemeBrush}"
-                BorderThickness="0">
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
-                    <Grid.ChildrenTransitions>
+            <Grid  x:Name="PopupGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <Grid.ChildrenTransitions>
                         <TransitionCollection>
                             <EntranceThemeTransition/>
                         </TransitionCollection>
                     </Grid.ChildrenTransitions>
 
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -78,7 +76,7 @@
                     <Button x:Name="add" Grid.Row="2" Grid.Column="0" Content="Add" Click="ButtonAdd_Click" HorizontalAlignment="Center" />
 
                 </Grid>
-            </Border>
+
         </Popup>
 
 
