@@ -9,6 +9,8 @@ using TravelListAppG7Service.Models;
 using System;
 using System.Net;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Web.Security;
 
 namespace TravelListAppG7Service.Controllers
 {
@@ -51,6 +53,7 @@ namespace TravelListAppG7Service.Controllers
                 
                 return Content(HttpStatusCode.Conflict, String.Format("A user with the username: {0} already exists",item.username));
             }
+            item.password=CreatePasswordHash(item.password);
             User current = await InsertAsync(item);
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
@@ -64,8 +67,19 @@ namespace TravelListAppG7Service.Controllers
         [Route("api/tables/Users/login")]
         public SingleResult<User> Login(string userName, string Password)
         {
-            IQueryable<User> user = Query().Where(i => i.username == userName && i.password == Password);
+            String passwordControl = CreatePasswordHash(Password);
+            IQueryable<User> user = Query().Where(i => i.username == userName && i.password == passwordControl);
              return SingleResult.Create<User>(user);
+        }
+       
+
+        public  string CreatePasswordHash(string pwd)
+        {
+            
+            string hashedPwd =
+                FormsAuthentication.HashPasswordForStoringInConfigFile(
+                pwd, "sha1");
+            return hashedPwd;
         }
 
 

@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <DataTemplate x:Name="myTemplate">
-            <StackPanel>
+            <StackPanel PointerPressed="StackPanel_PointerPressed" PointerReleased="StackPanel_PointerReleased">
                 <TextBlock Text="{Binding Destination}"/>
                 <TextBlock Text="{Binding Day}"/>
                 <Line Stroke="Green" X1="0" X2="300" Y1="25" Y2="25"/>
@@ -44,8 +44,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Button Grid.Row="0" Content="Add new Destination" Click="ShowPopupOffsetClicked" />
-            <ListBox Grid.Row="1" x:Name="DestinationList"   ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" DoubleTapped="ListBox_DoubleTapped"/>
-                  
+            <ListBox Grid.Row="1" x:Name="DestinationList"   ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" DoubleTapped="ListBox_DoubleTapped" ManipulationStarted="DestinationList_ManipulationStarted" ManipulationDelta="DestinationList_ManipulationDelta"/>
+
 
         </Grid>
         <Popup   x:Name="StandardPopup" >

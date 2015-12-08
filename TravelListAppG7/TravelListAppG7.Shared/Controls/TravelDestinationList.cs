@@ -9,18 +9,23 @@ using Windows.Phone.UI.Input;
 using System;
 using Windows.UI.Popups;
 using System.ComponentModel;
+using Windows.UI.Input;
+using System.Collections.Generic;
+using Windows.Foundation;
 
 namespace TravelListAppG7.Controls
 {
     sealed partial class TravelDestinationList : Page
     {
-
+        private Point initialpoint;
+        private int teller = 0;
         private DomainController dc;
         public TravelDestinationList()
         {
             dc = DomainController.Instance;
             this.InitializeComponent();
             HardwareButtons.BackPressed += OnBackPressed;
+            
             fillContext();
         }
         public async void fillContext() {
@@ -88,5 +93,37 @@ namespace TravelListAppG7.Controls
                 Frame.Navigate(typeof(HomePage));
             }
         }
+        private void DestinationList_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+            initialpoint = e.Position;
+            Debug.WriteLine("manipulation started");
+        }
+
+        private void DestinationList_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            Debug.WriteLine("ManipulationDelta");
+            if (e.IsInertial)
+            {
+                Point currentpoint = e.Position;
+                if (currentpoint.X - initialpoint.X >= 500)//500 is the threshold value, where you want to trigger the swipe right event
+                {
+                    Debug.WriteLine("Swipe Right");
+                    e.Complete();
+                }
+            }
+        }
+        private void StackPanel_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            Debug.WriteLine("click");
+        }
+        private void StackPanel_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            Debug.WriteLine("Releades");
+        }
+
+
+
+
     }
+
 }
