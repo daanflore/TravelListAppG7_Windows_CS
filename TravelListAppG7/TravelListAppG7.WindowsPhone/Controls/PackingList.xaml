@@ -71,7 +71,7 @@
                     <TextBox Grid.Row="1"  Grid.Column="1" Name="TxtAmount" Text="" />
 
 
-                    <Button x:Name="cancel" Grid.Row="2" Grid.Column="1" Content="Cancle" Click="ClosePopupClicked" HorizontalAlignment="Center" />
+                <Button x:Name="cancel" Grid.Row="2" Grid.Column="1" Content="cancel" Click="ClosePopupClicked" HorizontalAlignment="Center" />
                     <Button x:Name="add" Grid.Row="2" Grid.Column="0" Content="Add" Click="ButtonAdd_Click" HorizontalAlignment="Center" />
 
                 </Grid>

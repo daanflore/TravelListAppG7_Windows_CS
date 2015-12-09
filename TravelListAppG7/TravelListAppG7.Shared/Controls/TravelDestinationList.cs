@@ -17,15 +17,28 @@ namespace TravelListAppG7.Controls
 {
     sealed partial class TravelDestinationList : Page
     {
-        private Point initialpoint;
-        private int teller = 0;
         private DomainController dc;
+        private int startXCord;
+        private int endXCord;
         public TravelDestinationList()
         {
             dc = DomainController.Instance;
             this.InitializeComponent();
             HardwareButtons.BackPressed += OnBackPressed;
-            
+
+            DestinationList.ManipulationMode = ManipulationModes.TranslateX | ManipulationModes.TranslateY;
+            //DestinationList.ManipulationStarted += (s, e) => x1 = (int)e.Position.X;
+           /* DestinationList.ManipulationCompleted += (s, e) =>
+            {
+                Debug.WriteLine("test");
+                Debug.WriteLine(x1);
+                Debug.WriteLine(x2);
+                x2 = (int)e.Position.X;
+                if (x1 > x2)
+                {
+                    Debug.WriteLine("test");
+                }
+            };*/
             fillContext();
         }
         public async void fillContext() {
@@ -95,35 +108,30 @@ namespace TravelListAppG7.Controls
         }
         private void DestinationList_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
         {
-            initialpoint = e.Position;
-            Debug.WriteLine("manipulation started");
+            startXCord = (int)e.Position.X;
+            
         }
 
-        private void DestinationList_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private async void DestinationList_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
-            Debug.WriteLine("ManipulationDelta");
-            if (e.IsInertial)
+            TravelList dest= (TravelList)DestinationList.SelectedItem;
+            endXCord = (int)e.Position.X;
+            if (startXCord > endXCord+100)
             {
-                Point currentpoint = e.Position;
-                if (currentpoint.X - initialpoint.X >= 500)//500 is the threshold value, where you want to trigger the swipe right event
+
+                MessageDialog messageDialog = new MessageDialog("Are you sure you want To delete "+ dest.Destination+" ?");
+                messageDialog.Commands.Add(new UICommand("Delete"));
+                messageDialog.Commands.Add(new UICommand("Cancel"));
+                messageDialog.DefaultCommandIndex = 0;
+                messageDialog.CancelCommandIndex = 1;
+                var result = await messageDialog.ShowAsync();
+                if (result.Label.Equals("Delete"))
                 {
-                    Debug.WriteLine("Swipe Right");
-                    e.Complete();
+                    Debug.WriteLine("test");
                 }
+                
             }
         }
-        private void StackPanel_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            Debug.WriteLine("click");
-        }
-        private void StackPanel_PointerReleased(object sender, PointerRoutedEventArgs e)
-        {
-            Debug.WriteLine("Releades");
-        }
-
-
-
-
     }
 
 }

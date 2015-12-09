@@ -91,6 +91,7 @@ namespace TravelListAppG7.Domain
             Debug.WriteLine(categorie.AmountCompleted);
             destination.updateCategorie(categorie);
         }
+
     }
 
 }
