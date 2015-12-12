@@ -32,7 +32,7 @@ namespace TravelListAppG7
             {
                 ButtonLogin.IsEnabled = false;
                 ButtonRegister.IsEnabled = false;
-                var userItem = new User { Username = TextUsername.Text, Password = TextPassword.Text };
+                var userItem = new User { Username = TextUsername.Text, Password = TextPassword.Password };
                 await dc.Register(userItem);
                 HardwareButtons.BackPressed -= OnBackPressed;
                 Frame.Navigate(typeof(HomePage));
@@ -53,7 +53,7 @@ namespace TravelListAppG7
             {
                 ButtonLogin.IsEnabled = false;
                 ButtonRegister.IsEnabled = false;
-                await dc.Login(TextUsername.Text, TextPassword.Text);
+                await dc.Login(TextUsername.Text, TextPassword.Password);
                 HardwareButtons.BackPressed -= OnBackPressed;
                 Frame.Navigate(typeof(HomePage));
             }
