@@ -9,7 +9,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="LayoutRoot">
-
+        <Grid.Background>
+            <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/PackingBG.jpg" AlignmentY="Top" AlignmentX="Center"/>
+        </Grid.Background>
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
@@ -22,15 +24,15 @@
         </Grid.RowDefinitions>
 
         <!-- Title Panel -->
-        <StackPanel Grid.Row="0" Margin="19,0,0,0">
-            <TextBlock Text="MY APPLICATION" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
-            <TextBlock x:Name="Title" Text="{Binding}" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,18,0,18">
+            <TextBlock Text="LET'S PACK" Style="{StaticResource TitleTextBlockStyle}" Margin="20,0,16,0" FontSize="30" Foreground="White"/>
+            <TextBlock x:Name="Title" Text="{Binding}" Margin="20,0,16,0" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
         </StackPanel>
     
         <!--TODO: Content should be placed within the following grid-->
         <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Button Content="Destinations" Click="ButtonViewDestinations_Click"/>
-            <Button Content="Logout" Click="ButtonLogout_Click"/>
+            <Button Content="Destinations" Click="ButtonViewDestinations_Click"  HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0"/>
+            <Button Content="Logout" Click="ButtonLogout_Click"  HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0"/>
 
         </StackPanel>
     </Grid>

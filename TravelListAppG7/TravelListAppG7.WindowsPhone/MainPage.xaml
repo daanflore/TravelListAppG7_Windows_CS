@@ -20,7 +20,7 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,18,0,18">
-            <TextBlock Text="Let's Pack" Style="{StaticResource TitleTextBlockStyle}" Margin="20,0,16,0" FontSize="30" Foreground="White"/>
+            <TextBlock Text="LET'S PACK" Style="{StaticResource TitleTextBlockStyle}" Margin="20,0,16,0" FontSize="30" Foreground="White"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -40,9 +40,6 @@
             <TextBox Grid.Row="0" Grid.Column="1" Name="TextUsername" Text="" />
             <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource BodyTextBlockStyle}" Text="Password" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="22" Foreground="White" FontWeight="Medium"/>
             <PasswordBox Grid.Row="1" Grid.Column="1" Name="TextPassword"/>
-            <!--
-            <TextBox Grid.Row="1" Grid.Column="1" Name="TextPassword" Text="" />
-            -->
             <Button Grid.Row ="2" Grid.ColumnSpan="2" Name="ButtonLogin" Click="ButtonLogin_Click" HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0">Login</Button>
             <Button Grid.Row="3" Grid.ColumnSpan="2" Name="ButtonRegister" Click="ButtonRegister_Click" HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0">Register</Button>
         </Grid>
