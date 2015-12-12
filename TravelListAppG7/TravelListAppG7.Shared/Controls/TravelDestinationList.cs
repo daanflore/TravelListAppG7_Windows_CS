@@ -46,7 +46,7 @@ namespace TravelListAppG7.Controls
             this.DataContext = new CollectionViewSource { Source = await dc.GetUserDestinations() };
         }
 
-        private void ListBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        private void ListBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
             TravelList selected = DestinationList.SelectedItem as TravelList;
             dc.destination = selected;

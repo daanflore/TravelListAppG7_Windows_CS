@@ -46,7 +46,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Button Grid.Row="0" Content="Add new Destination" Click="ShowPopupOffsetClicked"  HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0"/>
-            <ListView Grid.Row="1" x:Name="DestinationList"   ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" DoubleTapped="ListBox_DoubleTapped" ManipulationStarted="DestinationList_ManipulationStarted" ManipulationCompleted="DestinationList_ManipulationCompleted" />
+            <ListView Grid.Row="1" x:Name="DestinationList" ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" Tapped="ListBox_Tapped" ManipulationStarted="DestinationList_ManipulationStarted" ManipulationCompleted="DestinationList_ManipulationCompleted" />
         </Grid>
 
         <Popup x:Name="StandardPopup">
