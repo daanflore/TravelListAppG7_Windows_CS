@@ -18,7 +18,7 @@ namespace TravelListAppG7.Controls
             dc = DomainController.Instance;
             HardwareButtons.BackPressed += OnBackPressed;
             user = dc.user;
-            Title.Text = user.Username;
+            Title.Text = (user.Username).ToUpper();
             
         }
         private void ButtonViewDestinations_Click(object sender, RoutedEventArgs e)
