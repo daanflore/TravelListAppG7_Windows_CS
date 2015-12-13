@@ -12,6 +12,7 @@ using System.ComponentModel;
 using Windows.UI.Input;
 using System.Collections.Generic;
 using Windows.Foundation;
+using System.Threading.Tasks;
 
 namespace TravelListAppG7.Controls
 {
@@ -27,18 +28,6 @@ namespace TravelListAppG7.Controls
             HardwareButtons.BackPressed += OnBackPressed;
 
             DestinationList.ManipulationMode = ManipulationModes.TranslateX | ManipulationModes.TranslateY;
-            //DestinationList.ManipulationStarted += (s, e) => x1 = (int)e.Position.X;
-           /* DestinationList.ManipulationCompleted += (s, e) =>
-            {
-                Debug.WriteLine("test");
-                Debug.WriteLine(x1);
-                Debug.WriteLine(x2);
-                x2 = (int)e.Position.X;
-                if (x1 > x2)
-                {
-                    Debug.WriteLine("test");
-                }
-            };*/
             fillContext();
         }
         public async void fillContext() {
@@ -46,8 +35,11 @@ namespace TravelListAppG7.Controls
             this.DataContext = new CollectionViewSource { Source = await dc.GetUserDestinations() };
         }
 
-        private void ListBox_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void ListBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
+
+            //Avoid Access Violation Exception error in visual studio https://social.msdn.microsoft.com/forums/windowsapps/en-us/fde433e8-87f8-4005-ac81-01b12e016986/debugging-access-violation-exceptions
+            await Task.Delay(50);
             TravelList selected = DestinationList.SelectedItem as TravelList;
             dc.destination = selected;
             HardwareButtons.BackPressed -= OnBackPressed;
@@ -74,8 +66,12 @@ namespace TravelListAppG7.Controls
         {
             try
             {
+                
                 add.IsEnabled = false;
                 cancel.IsEnabled = false;
+                if (DatePicker.Date.Date < DateTime.Now.Date) {
+                    throw new ArgumentException("If you aren't a time traveler I think it is impossible to travel in the past");
+                    }
                 TravelList travelList = new TravelList { Destination = TxtDestination.Text, Day = DatePicker.Date.DateTime };
                 dc.addTravelDestination(travelList);
                 TxtDestination.Text = "";
@@ -118,16 +114,18 @@ namespace TravelListAppG7.Controls
             endXCord = (int)e.Position.X;
             if (startXCord > endXCord+100)
             {
-
-                MessageDialog messageDialog = new MessageDialog("Are you sure you want To delete "+ dest.Destination+" ?");
-                messageDialog.Commands.Add(new UICommand("Delete"));
-                messageDialog.Commands.Add(new UICommand("Cancel"));
-                messageDialog.DefaultCommandIndex = 0;
-                messageDialog.CancelCommandIndex = 1;
-                var result = await messageDialog.ShowAsync();
-                if (result.Label.Equals("Delete"))
+                if (dest != null)
                 {
-                    Debug.WriteLine("test");
+                    MessageDialog messageDialog = new MessageDialog("Are you sure you want To delete " + dest.Destination + " ?");
+                    messageDialog.Commands.Add(new UICommand("Delete"));
+                    messageDialog.Commands.Add(new UICommand("Cancel"));
+                    messageDialog.DefaultCommandIndex = 0;
+                    messageDialog.CancelCommandIndex = 1;
+                    var result = await messageDialog.ShowAsync();
+                    if (result.Label.Equals("Delete"))
+                    {
+                        dc.removeTravelList(dest);
+                    }
                 }
                 
             }

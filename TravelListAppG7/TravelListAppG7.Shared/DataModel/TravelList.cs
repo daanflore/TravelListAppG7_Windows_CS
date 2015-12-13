@@ -33,18 +33,8 @@ namespace TravelListAppG7.DataModel
         }
         
         [JsonProperty(PropertyName = "day")]
-        public DateTime Day { get{
-                return day.Date; 
-                } set {
-                if (value.Date < new DateTime().Date)
-                {
-                    throw new ArgumentException("Travel date can't be in the past");
-                }
-                else {
-                    day = value.Date;
-                }
-            }
-        }
+        public DateTime Day { get; set;        }
+        
 
         [JsonProperty(PropertyName = "userId")]
         public string UserId { get; set; }
@@ -66,6 +56,10 @@ namespace TravelListAppG7.DataModel
         {
             Debug.WriteLine(categorie.Amount);
              await categorieTable.UpdateAsync(categorie);
+        }
+        public async void removeCategorie(Categorie categorie) {
+            await categorieTable.DeleteAsync(categorie);
+            categorieList.Remove(categorie);
         }
     }
 }

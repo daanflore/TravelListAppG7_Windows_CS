@@ -27,7 +27,10 @@ namespace TravelListAppG7.DataModel
             this.travelList.Add(travelList);
             if (travelList == null) { }
         }
-
+        public async void removeTravelList(TravelList travelList) {
+            await userTable.DeleteAsync(travelList);
+            this.travelList.Remove(travelList);
+        }
 
 
 

@@ -44,7 +44,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Button Grid.Row="0" Content="Add new Categorie" Click="ShowPopupOffsetClicked"  HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0"/>
-            <ListView Grid.Row="1" x:Name="CategorieDetailList" ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" Tapped="ListBox_Tapped"/>
+            <ListView Grid.Row="1" x:Name="CategorieDetailList" ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" Tapped="ListBox_Tapped" ManipulationStarted="CategorieDetailList_ManipulationStarted" ManipulationCompleted="CategorieDetailList_ManipulationCompleted"/>
         </Grid>
         <Popup   x:Name="StandardPopup" >
             <Grid  x:Name="PopupGrid">

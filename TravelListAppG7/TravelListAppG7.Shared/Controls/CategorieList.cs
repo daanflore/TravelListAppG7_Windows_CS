@@ -18,6 +18,8 @@ using Windows.UI.Xaml.Navigation;
 using TravelListAppG7.Domain;
 using TravelListAppG7.DataModel;
 using Windows.Phone.UI.Input;
+using Windows.UI.Popups;
+using System.Threading.Tasks;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -29,11 +31,13 @@ namespace TravelListAppG7.Controls
     public sealed partial class CategorieList : Page
     {
         private DomainController dc;
-        
+        private int startXCord;
+        private int endXCord;
         public CategorieList()
         {
             dc = DomainController.Instance;
             this.InitializeComponent();
+            CategorieDetailList.ManipulationMode = ManipulationModes.TranslateX | ManipulationModes.TranslateY;
             HardwareButtons.BackPressed += OnBackPressed;
             fillContext();
         }
@@ -43,10 +47,11 @@ namespace TravelListAppG7.Controls
   
             this.DataContext = new CollectionViewSource { Source = await dc.GetTravelListCategorie()};
         }
-        private void ListBox_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void ListBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            await Task.Delay(50);
             Categorie selected = CategorieDetailList.SelectedItem as Categorie;
-            dc.categorie= selected;
+            dc.categorie = selected;
             HardwareButtons.BackPressed -= OnBackPressed;
             Frame.Navigate(typeof(PackingList));
         }
@@ -67,15 +72,29 @@ namespace TravelListAppG7.Controls
             StandardPopup.IsOpen = true;
 
         }
-        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        private async void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
-            add.IsEnabled = false;
-            cancel.IsEnabled = false;
-            dc.addCategorie(new Categorie { Name = TxtCategorie.Text });
-            TxtCategorie.Text = "";
-            add.IsEnabled = true;
-            cancel.IsEnabled = true;
-            StandardPopup.IsOpen = false;
+            try
+            {
+                add.IsEnabled = false;
+                cancel.IsEnabled = false;
+                dc.addCategorie(new Categorie { Name = TxtCategorie.Text });
+
+                StandardPopup.IsOpen = false;
+            }
+            catch (ArgumentException ex)
+            {
+                MessageDialog msgbox = new MessageDialog(ex.Message);
+                await msgbox.ShowAsync();
+            }
+            finally
+            {
+                TxtCategorie.Text = "";
+                add.IsEnabled = true;
+                cancel.IsEnabled = true;
+            }
+
+
         }
         private async void OnBackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
         {
@@ -89,6 +108,33 @@ namespace TravelListAppG7.Controls
             {
                 HardwareButtons.BackPressed -= OnBackPressed;
                 Frame.Navigate(typeof(TravelDestinationList));
+            }
+        }
+        private void CategorieDetailList_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+            startXCord = (int)e.Position.X;
+        }
+
+        private async void CategorieDetailList_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            Categorie cat = (Categorie)CategorieDetailList.SelectedItem;
+            endXCord = (int)e.Position.X;
+            if (startXCord > endXCord + 100)
+            {
+                if (cat != null)
+                {
+                    MessageDialog messageDialog = new MessageDialog("Are you sure you want To delete " + cat.Name + " ?");
+                    messageDialog.Commands.Add(new UICommand("Delete"));
+                    messageDialog.Commands.Add(new UICommand("Cancel"));
+                    messageDialog.DefaultCommandIndex = 0;
+                    messageDialog.CancelCommandIndex = 1;
+                    var result = await messageDialog.ShowAsync();
+                    if (result.Label.Equals("Delete"))
+                    {
+                        dc.removeCategorie(cat);
+                    }
+                }
+
             }
         }
 

@@ -76,6 +76,15 @@ namespace TravelListAppG7.DataModel
             return true;
             
         }
+        public async Task<bool> removePackingItem(PackingItem packingItem) {
+            await PackingTable.DeleteAsync(packingItem);
+            packingList.Remove(packingItem);
+            Amount--;
+            if (packingItem.Packed) {
+                AmountCompleted--;
+            }
+            return true;
+        }
       
  }
 }

@@ -91,7 +91,17 @@ namespace TravelListAppG7.Domain
             Debug.WriteLine(categorie.AmountCompleted);
             destination.updateCategorie(categorie);
         }
-
+        public void removeTravelList(TravelList travelList) {
+            user.removeTravelList(travelList);
+        }
+        public void removeCategorie(Categorie categorie) {
+            destination.removeCategorie(categorie);
+        }
+        public async void removePackingItem(PackingItem packingItem) {
+            await categorie.removePackingItem(packingItem);
+            Debug.WriteLine(categorie.AmountCompleted);
+            destination.updateCategorie(categorie);
+        }
     }
 
 }

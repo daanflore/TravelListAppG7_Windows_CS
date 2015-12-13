@@ -19,6 +19,7 @@ using TravelListAppG7.Domain;
 using TravelListAppG7.DataModel;
 using System.Diagnostics;
 using Windows.Phone.UI.Input;
+using Windows.UI.Popups;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -30,10 +31,13 @@ namespace TravelListAppG7.Controls
     public sealed partial class PackingList : Page
     {
         private DomainController dc;
+        private int startXCord;
+        private int endXCord;
 
         public PackingList()
         {
             this.InitializeComponent();
+            CategorieDetailList.ManipulationMode = ManipulationModes.TranslateX | ManipulationModes.TranslateY;
             dc = DomainController.Instance;
             HardwareButtons.BackPressed += OnBackPressed;
             fillContext();
@@ -41,7 +45,7 @@ namespace TravelListAppG7.Controls
 
         public async void fillContext()
         {
-            var contextzelf =await dc.GetCategoriePacking();
+            
             this.DataContext = new CollectionViewSource { Source = await dc.GetCategoriePacking() };
         }
 
@@ -62,7 +66,7 @@ namespace TravelListAppG7.Controls
             StandardPopup.IsOpen = true;
 
         }
-        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        private async void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -78,9 +82,11 @@ namespace TravelListAppG7.Controls
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                MessageDialog msgbox = new MessageDialog(ex.Message);
+                await msgbox.ShowAsync();
             }
-            finally {
+            finally
+            {
                 add.IsEnabled = true;
                 cancel.IsEnabled = true;
             }
@@ -105,6 +111,33 @@ namespace TravelListAppG7.Controls
             {
                 HardwareButtons.BackPressed -= OnBackPressed;
                 Frame.Navigate(typeof(CategorieList));
+            }
+        }
+        private void CategorieDetailList_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+            startXCord = (int)e.Position.X;
+        }
+
+        private async void CategorieDetailList_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            PackingItem item = (PackingItem)CategorieDetailList.SelectedItem;
+            endXCord = (int)e.Position.X;
+            if (startXCord > endXCord + 100)
+            {
+                if (item != null)
+                {
+                    MessageDialog messageDialog = new MessageDialog("Are you sure you want To delete " + item.Name + " ?");
+                    messageDialog.Commands.Add(new UICommand("Delete"));
+                    messageDialog.Commands.Add(new UICommand("Cancel"));
+                    messageDialog.DefaultCommandIndex = 0;
+                    messageDialog.CancelCommandIndex = 1;
+                    var result = await messageDialog.ShowAsync();
+                    if (result.Label.Equals("Delete"))
+                    {
+                        dc.removePackingItem(item);
+                    }
+                }
+
             }
         }
     }
