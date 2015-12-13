@@ -12,6 +12,8 @@ namespace TravelListAppG7.DataModel
     {
         private MobileServiceCollection<Categorie, Categorie> categorieList;
         private IMobileServiceTable<Categorie> categorieTable = App.MobileService.GetTable<Categorie>();
+        private MobileServiceCollection<PackingItem, PackingItem> packingList;
+        private IMobileServiceTable<PackingItem> packingTable = App.MobileService.GetTable<PackingItem>();
         private String destination;
         private DateTime day; 
         public string Id { get; set; }
@@ -43,6 +45,11 @@ namespace TravelListAppG7.DataModel
         {
             categorieList = await categorieTable.Where(i=>i.TravelListId==this.Id).ToCollectionAsync();
             return categorieList;
+        }
+        public async Task<MobileServiceCollection<PackingItem, PackingItem>> getPackingList()
+        {
+            packingList = await packingTable.Where(i => i.TravelListId == this.Id).ToCollectionAsync();
+            return packingList;
         }
 
         public async void addCategorie(Categorie categorie)

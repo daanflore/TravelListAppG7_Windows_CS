@@ -12,6 +12,8 @@ namespace TravelListAppG7.DataModel
         public string Id { get; set; }
         [JsonProperty(PropertyName = "categorieId")]
         public string CategorieId { get; set; }
+        [JsonProperty(PropertyName = "travelListId")]
+        public string TravelListId { get; set; }
         [JsonProperty(PropertyName = "name")]
         public string Name {
             get

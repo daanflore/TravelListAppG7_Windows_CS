@@ -71,6 +71,7 @@ namespace TravelListAppG7.DataModel
         {
             Amount++;
             packingItem.CategorieId= this.Id;
+            packingItem.TravelListId = this.TravelListId;
             await PackingTable.InsertAsync(packingItem);
             packingList.Add(packingItem);
             return true;

@@ -6,6 +6,7 @@ using System.Web.Http.OData;
 using Microsoft.WindowsAzure.Mobile.Service;
 using TravelListAppG7Service.DataObjects;
 using TravelListAppG7Service.Models;
+using System.Collections.Generic;
 
 namespace TravelListAppG7Service.Controllers
 {
@@ -48,6 +49,7 @@ namespace TravelListAppG7Service.Controllers
         {
              return DeleteAsync(id);
         }
+
 
     }
 }

@@ -11,6 +11,7 @@ namespace TravelListAppG7Service.Controllers
 {
     public class PackingItemController : TableController<PackingItem>
     {
+        
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);

@@ -46,6 +46,9 @@ namespace TravelListAppG7.Domain
         {
             return await categorie.getPackingItems();
         }
+        public async Task<MobileServiceCollection<PackingItem, PackingItem>> getTravelListPacking() {
+            return await destination.getPackingList();
+        }
 
         public async Task<bool> Login(string username, string password)  {
             if (username == null || username.Trim().Equals("") || password == null || password.Trim().Equals(""))
@@ -69,7 +72,7 @@ namespace TravelListAppG7.Domain
         }
         public async Task<MobileServiceCollection<Categorie, Categorie>> GetTravelListCategorie()
         {
-            return await destination.getTravelLists();
+                        return await destination.getTravelLists();
 
         }
 

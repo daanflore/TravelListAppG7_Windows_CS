@@ -44,7 +44,7 @@ namespace TravelListAppG7.Controls
 
         public async void fillContext()
         {
-  
+            var c= await dc.getTravelListPacking();
             this.DataContext = new CollectionViewSource { Source = await dc.GetTravelListCategorie()};
         }
         private async void ListBox_Tapped(object sender, TappedRoutedEventArgs e)
