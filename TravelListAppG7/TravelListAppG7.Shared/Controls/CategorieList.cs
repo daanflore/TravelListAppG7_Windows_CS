@@ -43,7 +43,7 @@ namespace TravelListAppG7.Controls
   
             this.DataContext = new CollectionViewSource { Source = await dc.GetTravelListCategorie()};
         }
-        private void ListBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        private void ListBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Categorie selected = CategorieDetailList.SelectedItem as Categorie;
             dc.categorie= selected;

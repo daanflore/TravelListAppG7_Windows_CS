@@ -54,11 +54,15 @@
                 <Grid.Background>
                     <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/PackingBG.jpg" AlignmentY="Top" AlignmentX="Center"/>
                 </Grid.Background>
+                <Grid.ChildrenTransitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition/>
+                    </TransitionCollection>
+                </Grid.ChildrenTransitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-
                 <!--TitlePanel contains the name of the application and page title-->
                 <StackPanel Grid.Row="0" Margin="0,18,0,18">
                     <TextBlock Text="LET'S PACK" Style="{StaticResource TitleTextBlockStyle}" Margin="20,0,16,0" FontSize="30" Foreground="White"/>

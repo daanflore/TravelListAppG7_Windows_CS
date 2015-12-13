@@ -41,7 +41,7 @@ namespace TravelListAppG7.DataModel
                     throw new ArgumentException("Travel date can't be in the past");
                 }
                 else {
-                    day = value;
+                    day = value.Date;
                 }
             }
         }
