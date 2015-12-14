@@ -36,12 +36,14 @@ namespace TravelListAppG7.Controls
             this.InitializeComponent();
             HardwareButtons.BackPressed += OnBackPressed;
             fillContext();
+            
         }
 
         public async void fillContext()
         {
 
             this.DataContext = new CollectionViewSource { Source = await dc.getFriendPAckingItems() };
+            DestCombo.DataContext= new CollectionViewSource { Source = await dc.GetUserDestinations() };
         }
 
         private async void OnBackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
@@ -49,9 +51,23 @@ namespace TravelListAppG7.Controls
             e.Handled = true;
             HardwareButtons.BackPressed -= OnBackPressed;
             // add your own code here to run when Back is pressed
+            if (StandardPopup.IsOpen) {
+                StandardPopup.IsOpen = false;
+            }
+            else {
             Frame.Navigate(typeof(HomePage));
+            }
+
         }
-        
+        private void FriendPacked_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            PopupGrid.Width = Window.Current.Bounds.Width;
+            PopupGrid.Height = Window.Current.Bounds.Height;
+            StandardPopup.HorizontalOffset = (Window.Current.Bounds.Width - PopupGrid.Width) / 2;
+            StandardPopup.VerticalOffset = (Window.Current.Bounds.Height - PopupGrid.Height) / 2;
+            StandardPopup.IsOpen = true;
+        }
+
 
 
     }
