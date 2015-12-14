@@ -13,6 +13,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\CategorieList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\FriendPackingItems.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\FriendView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\HomePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\PackingList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\TravelDestinationList.cs" />

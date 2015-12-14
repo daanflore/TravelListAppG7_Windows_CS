@@ -39,6 +39,11 @@ namespace TravelListAppG7.Controls
             Frame.Navigate(typeof(MainPage));
             dc.user = null;
         }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            HardwareButtons.BackPressed -= OnBackPressed;
+            Frame.Navigate(typeof(FriendView));
+        }
 
     }
 }

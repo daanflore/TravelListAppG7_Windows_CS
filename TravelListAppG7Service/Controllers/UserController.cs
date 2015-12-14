@@ -81,6 +81,14 @@ namespace TravelListAppG7Service.Controllers
                 pwd, "sha1");
             return hashedPwd;
         }
+        [Route("api/tables/Users/user")]
+        [HttpPost]
+        public SingleResult<User> getFriend(string userName)
+        {
+            
+            IQueryable<User> user = Query().Where(i => i.username == userName);
+            return SingleResult.Create<User>(user);
+        }
 
 
     }
