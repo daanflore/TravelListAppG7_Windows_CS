@@ -67,8 +67,12 @@ namespace TravelListAppG7.Controls
             StandardPopup.VerticalOffset = (Window.Current.Bounds.Height - PopupGrid.Height) / 2;
             StandardPopup.IsOpen = true;
         }
-
-
+        private void ClosePopupClicked(object sender, RoutedEventArgs e)
+        {
+            // if the Popup is open, then close it
+            TxtItem.Text = "";
+            StandardPopup.IsOpen = false;
+        }
 
     }
 }

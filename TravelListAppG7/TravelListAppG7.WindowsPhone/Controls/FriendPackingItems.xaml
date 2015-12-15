@@ -97,7 +97,7 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                     <Button Grid.Row ="4" Grid.ColumnSpan="2" Name="add" HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0">Add</Button>
-                    <Button Grid.Row="5" Grid.ColumnSpan="2" Name="cancel" HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0">Cancel</Button>
+                    <Button Grid.Row="5" Grid.ColumnSpan="2" Name="cancel" Click="ClosePopupClicked" HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0">Cancel</Button>
                 </Grid>
             </Grid>
         </Popup>
