@@ -11,17 +11,15 @@
         <DataTemplate x:Name="myTemplate">
             <StackPanel>
                 <CheckBox Name="CheckBoxComplete" IsChecked="{Binding Packed}" Content="{Binding Name}" Margin="10,5" VerticalAlignment="Center"/>
-                <TextBlock Text="{Binding Amount}" FontSize="18" Foreground="White"/>
-                <Line Stroke="Black" StrokeThickness="3" X1="0" X2="400" Y1="25" Y2="25"/>
+                <TextBlock Text="{Binding Amount}"/>
+                <Line Stroke="Green" X1="0" X2="300" Y1="25" Y2="25"/>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
-
     <Grid x:Name="LayoutRoot">
         <Grid.Background>
             <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/PackingBG.jpg" AlignmentY="Top" AlignmentX="Center"/>
         </Grid.Background>
-
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
@@ -33,25 +31,23 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!-- Title Panel -->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,18,0,18">
             <TextBlock Text="LET'S PACK" Style="{StaticResource TitleTextBlockStyle}" Margin="20,0,16,0" FontSize="30" Foreground="White"/>
             <TextBlock Text="FRIEND " Margin="20,0,16,0" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
         </StackPanel>
 
+        <!--TODO: Content should be placed within the following grid-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
+
             <ListView Grid.Row="1" x:Name="FriendPacked" ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" Tapped="FriendPacked_Tapped" />
         </Grid>
-
-        <Popup x:Name="StandardPopup">
-            <Grid  x:Name="PopupGrid">
-                <Grid.Background>
-                    <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/PackingBG.jpg" AlignmentY="Top" AlignmentX="Center"/>
-                </Grid.Background>
-
+        <Popup   x:Name="StandardPopup" >
+            <Grid  x:Name="PopupGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                 <Grid.ChildrenTransitions>
                     <TransitionCollection>
                         <EntranceThemeTransition/>
@@ -60,43 +56,34 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Item" FontSize="24.667" HorizontalAlignment="Center" />
+                <TextBox Grid.Row="0" Grid.Column="1" Name="TxtItem" Text="" />
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Amount" FontSize="24.667" HorizontalAlignment="Center" />
+                <TextBox Grid.Row="1"  Grid.Column="1" Name="TxtAmount" Text="" />
+                <ComboBox x:Name="DestCombo" Grid.Row="2" Grid.ColumnSpan="2" Header="Destinations" ItemsSource="{Binding}">
+                    <!--ItemsSource="{Binding Destinations}"-->
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Destination }"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
-                <StackPanel Grid.Row="0" Margin="0,18,0,18">
-                    <TextBlock Text="LET'S PACK" Style="{StaticResource TitleTextBlockStyle}" Margin="20,0,16,0" FontSize="30" Foreground="White"/>
-                </StackPanel>
+                <Button x:Name="cancel" Grid.Row="3" Grid.Column="1" Content="cancel"  HorizontalAlignment="Center" />
+                <Button x:Name="add" Grid.Row="3" Grid.Column="0" Content="Add"  HorizontalAlignment="Center" />
 
-                <Grid x:Name="ContentPanel" Grid.Row="1" Margin="18,0,18,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*" />
-                        <ColumnDefinition Width="4*" />
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Item" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="22" Foreground="White" FontWeight="Medium" Grid.ColumnSpan="2" Margin="0,0,67.167,16.333"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Name="TxtItem" Text="" />
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Amount" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="22" Foreground="White" FontWeight="Medium"/>
-                    <TextBox Grid.Row="1"  Grid.Column="1" Name="TxtAmount" Text="" />
-                    <ComboBox x:Name="DestCombo" Grid.Row="2" Grid.ColumnSpan="2" Header="Destinations" ItemsSource="{Binding}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Destination }" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="22" Foreground="White" FontWeight="Medium"/>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                    <Button Grid.Row ="3" Grid.ColumnSpan="2" Name="add" HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0">Add</Button>
-                    <Button Grid.Row="4" Grid.ColumnSpan="2" Name="cancel" HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0">Cancel</Button>
-                </Grid>
             </Grid>
+
         </Popup>
     </Grid>
+
 </Page>
