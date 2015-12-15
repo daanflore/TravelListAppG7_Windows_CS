@@ -16,10 +16,12 @@
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
+
     <Grid x:Name="LayoutRoot">
         <Grid.Background>
             <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/PackingBG.jpg" AlignmentY="Top" AlignmentX="Center"/>
         </Grid.Background>
+        
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
@@ -31,44 +33,42 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Title Panel -->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,18,0,18">
             <TextBlock Text="LET'S PACK" Style="{StaticResource TitleTextBlockStyle}" Margin="20,0,16,0" FontSize="30" Foreground="White"/>
             <TextBlock Text="Packing items" Margin="20,0,16,0" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
         </StackPanel>
 
-        <!--TODO: Content should be placed within the following grid-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="0" Content="Add new Item" Click="ShowPopupOffsetClicked"  HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0"/>
+            <Button Grid.Row="0" Content="Add new item" Click="ShowPopupOffsetClicked"  HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0"/>
             <ListView Grid.Row="1" x:Name="CategorieDetailList" ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" ManipulationStarted="CategorieDetailList_ManipulationStarted" ManipulationCompleted="CategorieDetailList_ManipulationCompleted" />
-
-
         </Grid>
+        
         <Popup x:Name="StandardPopup">
             <Grid  x:Name="PopupGrid">
                 <Grid.Background>
                     <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/PackingBG.jpg" AlignmentY="Top" AlignmentX="Center"/>
                 </Grid.Background>
+                
                 <Grid.ChildrenTransitions>
                     <TransitionCollection>
                         <EntranceThemeTransition/>
                     </TransitionCollection>
                 </Grid.ChildrenTransitions>
+                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <!--TitlePanel contains the name of the application and page title-->
+                
                 <StackPanel Grid.Row="0" Margin="0,18,0,18">
                     <TextBlock Text="LET'S PACK" Style="{StaticResource TitleTextBlockStyle}" Margin="20,0,16,0" FontSize="30" Foreground="White"/>
                 </StackPanel>
 
-                <!--ContentPanel - place additional content here-->
                 <Grid x:Name="ContentPanel" Grid.Row="1" Margin="18,0,18,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -76,10 +76,12 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
+                    
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="4*" />
                     </Grid.ColumnDefinitions>
+                    
                     <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource BodyTextBlockStyle}" Text="Item" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="22" Foreground="White" FontWeight="Medium"/>
                     <TextBox Grid.Row="0" Grid.Column="1" Name="TxtItem" Text="" />
                     <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource BodyTextBlockStyle}" Text="Amount" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="22" Foreground="White" FontWeight="Medium"/>

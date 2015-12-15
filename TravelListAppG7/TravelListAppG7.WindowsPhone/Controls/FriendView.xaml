@@ -16,10 +16,12 @@
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
+    
     <Grid x:Name="LayoutRoot">
         <Grid.Background>
             <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/PackingBG.jpg" AlignmentY="Top" AlignmentX="Center"/>
         </Grid.Background>
+        
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
@@ -31,26 +33,25 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Title Panel -->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,18,0,18">
             <TextBlock Text="LET'S PACK" Style="{StaticResource TitleTextBlockStyle}" Margin="20,0,16,0" FontSize="30" Foreground="White"/>
             <TextBlock Text="FRIENDS" Margin="20,0,16,0" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
         </StackPanel>
 
-        <!--TODO: Content should be placed within the following grid-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
+            
             <TextBox x:Name="txtUserName" Grid.Row="0" Grid.Column="0"/>
             <Button Grid.Row="0" Grid.Column="1" Content="Search"  HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0" Click="Button_Click"/>
             <ListView Grid.Row="1" Grid.ColumnSpan="2" x:Name="FriendDest" ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" Tapped="FriendDest_Tapped"/>
         </Grid>
-        
     </Grid>
 </Page>
