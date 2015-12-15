@@ -15,7 +15,8 @@ namespace TravelListAppG7.DataModel
         private MobileServiceCollection<PackingItem, PackingItem> packingList;
         private IMobileServiceTable<PackingItem> packingTable = App.MobileService.GetTable<PackingItem>();
         private String destination;
-        private DateTime day; 
+        private String day;
+        //private DateTime day;
         public string Id { get; set; }
 
         [JsonProperty(PropertyName = "destination")]
@@ -35,8 +36,9 @@ namespace TravelListAppG7.DataModel
         }
         
         [JsonProperty(PropertyName = "day")]
-        public DateTime Day { get; set;        }
-        
+        public string Day { get; set; }
+        //public DateTime Day { get; set; }
+
 
         [JsonProperty(PropertyName = "userId")]
         public string UserId { get; set; }

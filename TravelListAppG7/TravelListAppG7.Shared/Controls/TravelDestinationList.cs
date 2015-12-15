@@ -72,7 +72,7 @@ namespace TravelListAppG7.Controls
                 if (DatePicker.Date.Date < DateTime.Now.Date) {
                     throw new ArgumentException("If you aren't a time traveler I think it is impossible to travel in the past");
                     }
-                TravelList travelList = new TravelList { Destination = TxtDestination.Text, Day = DatePicker.Date.DateTime };
+                TravelList travelList = new TravelList { Destination = TxtDestination.Text, Day = DatePicker.Date.DateTime.ToString("d") };
                 dc.addTravelDestination(travelList);
                 TxtDestination.Text = "";
                 StandardPopup.IsOpen = false;
