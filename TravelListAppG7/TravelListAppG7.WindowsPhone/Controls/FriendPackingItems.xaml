@@ -84,7 +84,7 @@
                         <ColumnDefinition Width="4*" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Item" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="22" Foreground="White" FontWeight="Medium"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Item" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="22" Foreground="White" FontWeight="Medium"/>
                     <TextBox Grid.Row="0" Grid.Column="1" Name="TxtItem" Text="" />
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Amount" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="22" Foreground="White" FontWeight="Medium"/>
                     <TextBox Grid.Row="1"  Grid.Column="1" Name="TxtAmount" Text="" />
