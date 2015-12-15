@@ -10,8 +10,9 @@
     <Page.Resources>
         <DataTemplate x:Name="myTemplate">
             <StackPanel>
-                <CheckBox Name="CheckBoxComplete" IsChecked="{Binding Packed}" Content="{Binding Name}" Margin="10,5" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding Name}" Margin="10,5" VerticalAlignment="Center"/>
                 <TextBlock Text="{Binding Amount}"/>
+                <TextBlock Text="{Binding PackedString}"/>
                 <Line Stroke="Green" X1="0" X2="300" Y1="25" Y2="25"/>
             </StackPanel>
         </DataTemplate>
@@ -59,6 +60,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -69,7 +71,7 @@
                 <TextBox Grid.Row="0" Grid.Column="1" Name="TxtItem" Text="" />
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Amount" FontSize="24.667" HorizontalAlignment="Center" />
                 <TextBox Grid.Row="1"  Grid.Column="1" Name="TxtAmount" Text="" />
-                <ComboBox x:Name="DestCombo" Grid.Row="2" Grid.ColumnSpan="2" Header="Destinations" ItemsSource="{Binding}">
+                <ComboBox x:Name="DestCombo" Grid.Row="2" Grid.ColumnSpan="2" Header="Destinations" ItemsSource="{Binding}" DropDownClosed="DestCombo_DropDownClosed">
                     <!--ItemsSource="{Binding Destinations}"-->
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -77,9 +79,17 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
+                <ComboBox x:Name="CatCombo" Grid.Row="3" Grid.ColumnSpan="2" Header="Destinations" ItemsSource="{Binding}">
+                    <!--ItemsSource="{Binding Destinations}"-->
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name }"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
-                <Button x:Name="cancel" Grid.Row="3" Grid.Column="1" Content="cancel"  HorizontalAlignment="Center" />
-                <Button x:Name="add" Grid.Row="3" Grid.Column="0" Content="Add"  HorizontalAlignment="Center" />
+                <Button x:Name="cancel" Grid.Row="4" Grid.Column="1" Content="cancel"  HorizontalAlignment="Center" Click="cancel_Click" />
+                <Button x:Name="add" Grid.Row="4" Grid.Column="0" Content="Add"  HorizontalAlignment="Center" Click="add_Click" />
 
             </Grid>
 

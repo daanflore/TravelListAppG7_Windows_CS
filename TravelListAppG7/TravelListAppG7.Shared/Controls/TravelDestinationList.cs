@@ -26,8 +26,6 @@ namespace TravelListAppG7.Controls
             dc = DomainController.Instance;
             this.InitializeComponent();
             HardwareButtons.BackPressed += OnBackPressed;
-
-            DestinationList.ManipulationMode = ManipulationModes.TranslateX | ManipulationModes.TranslateY;
             fillContext();
         }
         public async void fillContext() {
@@ -102,18 +100,12 @@ namespace TravelListAppG7.Controls
                 Frame.Navigate(typeof(HomePage));
             }
         }
-        private void DestinationList_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        
+        private async void StackPanel_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            startXCord = (int)e.Position.X;
-            
-        }
-
-        private async void DestinationList_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
-        {
-            TravelList dest= (TravelList)DestinationList.SelectedItem;
-            endXCord = (int)e.Position.X;
-            if (startXCord > endXCord+100)
+            try
             {
+                TravelList dest = (TravelList)((FrameworkElement)sender).DataContext;
                 if (dest != null)
                 {
                     MessageDialog messageDialog = new MessageDialog("Are you sure you want To delete " + dest.Destination + " ?");
@@ -127,9 +119,15 @@ namespace TravelListAppG7.Controls
                         dc.removeTravelList(dest);
                     }
                 }
-                
+            }
+            catch (Exception ex) {
+            }
+
+
             }
         }
+
+
     }
 
-}
+

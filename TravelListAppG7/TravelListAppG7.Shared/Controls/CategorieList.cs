@@ -44,8 +44,8 @@ namespace TravelListAppG7.Controls
 
         public async void fillContext()
         {
-            var c= await dc.getTravelListPacking();
-            this.DataContext = new CollectionViewSource { Source = await dc.GetTravelListCategorie()};
+            var c = await dc.getTravelListPacking();
+            this.DataContext = new CollectionViewSource { Source = await dc.GetTravelListCategorie() };
         }
         private async void ListBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -110,17 +110,11 @@ namespace TravelListAppG7.Controls
                 Frame.Navigate(typeof(TravelDestinationList));
             }
         }
-        private void CategorieDetailList_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        private async void StackPanel_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            startXCord = (int)e.Position.X;
-        }
-
-        private async void CategorieDetailList_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
-        {
-            Categorie cat = (Categorie)CategorieDetailList.SelectedItem;
-            endXCord = (int)e.Position.X;
-            if (startXCord > endXCord + 100)
+            try
             {
+                Categorie cat = (Categorie)((FrameworkElement)sender).DataContext;
                 if (cat != null)
                 {
                     MessageDialog messageDialog = new MessageDialog("Are you sure you want To delete " + cat.Name + " ?");
@@ -134,9 +128,11 @@ namespace TravelListAppG7.Controls
                         dc.removeCategorie(cat);
                     }
                 }
-
             }
-        }
+            catch (Exception ex)
+            {
+            }
 
+        }
     }
 }

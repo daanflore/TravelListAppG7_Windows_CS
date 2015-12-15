@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <DataTemplate x:Name="myTemplate">
-            <StackPanel>
+            <StackPanel Holding="StackPanel_Holding">
                 <CheckBox Name="CheckBoxComplete" IsChecked="{Binding Packed, Mode=TwoWay}" Content="{Binding Name}" Margin="10,5" VerticalAlignment="Center" Click="CheckBoxComplete_Click"/>
                 <TextBlock Text="{Binding Amount}" FontSize="18" Foreground="White"/>
                 <Line Stroke="Black" StrokeThickness="3" X1="0" X2="400" Y1="25" Y2="25"/>
@@ -45,7 +45,7 @@
             </Grid.RowDefinitions>
 
             <Button Grid.Row="0" Content="Add new item" Click="ShowPopupOffsetClicked"  HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0"/>
-            <ListView Grid.Row="1" x:Name="CategorieDetailList" ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" ManipulationStarted="CategorieDetailList_ManipulationStarted" ManipulationCompleted="CategorieDetailList_ManipulationCompleted" />
+            <ListView Grid.Row="1" x:Name="CategorieDetailList" ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}"/>
         </Grid>
         
         <Popup x:Name="StandardPopup">

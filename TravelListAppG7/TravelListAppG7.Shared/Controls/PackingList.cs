@@ -113,20 +113,15 @@ namespace TravelListAppG7.Controls
                 Frame.Navigate(typeof(CategorieList));
             }
         }
-        private void CategorieDetailList_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
-        {
-            startXCord = (int)e.Position.X;
-        }
 
-        private async void CategorieDetailList_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        private async void StackPanel_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            PackingItem item = (PackingItem)CategorieDetailList.SelectedItem;
-            endXCord = (int)e.Position.X;
-            if (startXCord > endXCord + 100)
+            try
             {
-                if (item != null)
+                PackingItem pack = (PackingItem)((FrameworkElement)sender).DataContext;
+                if (pack != null)
                 {
-                    MessageDialog messageDialog = new MessageDialog("Are you sure you want To delete " + item.Name + " ?");
+                    MessageDialog messageDialog = new MessageDialog("Are you sure you want To delete " + pack.Name + " ?");
                     messageDialog.Commands.Add(new UICommand("Delete"));
                     messageDialog.Commands.Add(new UICommand("Cancel"));
                     messageDialog.DefaultCommandIndex = 0;
@@ -134,11 +129,15 @@ namespace TravelListAppG7.Controls
                     var result = await messageDialog.ShowAsync();
                     if (result.Label.Equals("Delete"))
                     {
-                        dc.removePackingItem(item);
+                        dc.removePackingItem(pack);
                     }
                 }
-
             }
+            catch (Exception ex)
+            {
+            }
+
+
         }
     }
 }

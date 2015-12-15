@@ -17,6 +17,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using TravelListAppG7.Domain;
 using Windows.Phone.UI.Input;
+using TravelListAppG7.DataModel;
+using Windows.UI.Popups;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -36,6 +38,7 @@ namespace TravelListAppG7.Controls
             this.InitializeComponent();
             HardwareButtons.BackPressed += OnBackPressed;
             fillContext();
+            TxtItem.IsEnabled = false;
             
         }
 
@@ -44,18 +47,23 @@ namespace TravelListAppG7.Controls
 
             this.DataContext = new CollectionViewSource { Source = await dc.getFriendPAckingItems() };
             DestCombo.DataContext= new CollectionViewSource { Source = await dc.GetUserDestinations() };
+            TravelList selected= (TravelList) DestCombo.SelectedItem;
+            dc.destination = selected;
+            CatCombo.DataContext = new CollectionViewSource { Source = await selected.getTravelLists() };
+            
         }
 
-        private async void OnBackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
+        private async void OnBackPressed(object sender, BackPressedEventArgs e)
         {
             e.Handled = true;
-            HardwareButtons.BackPressed -= OnBackPressed;
+            
             // add your own code here to run when Back is pressed
             if (StandardPopup.IsOpen) {
                 StandardPopup.IsOpen = false;
             }
             else {
-            Frame.Navigate(typeof(HomePage));
+                HardwareButtons.BackPressed -= OnBackPressed;
+                Frame.Navigate(typeof(FriendView));
             }
 
         }
@@ -65,9 +73,46 @@ namespace TravelListAppG7.Controls
             PopupGrid.Height = Window.Current.Bounds.Height;
             StandardPopup.HorizontalOffset = (Window.Current.Bounds.Width - PopupGrid.Width) / 2;
             StandardPopup.VerticalOffset = (Window.Current.Bounds.Height - PopupGrid.Height) / 2;
+            PackingItem packed = (PackingItem)FriendPacked.SelectedItem;
+            TxtItem.Text = packed.Name;
+            TxtAmount.Text = packed.Amount.ToString();
             StandardPopup.IsOpen = true;
         }
-
+        private async void DestCombo_DropDownClosed(object sender, object e)
+        {
+            CatCombo.IsEnabled = false;
+            TravelList selected =(TravelList) DestCombo.SelectedItem;
+            dc.destination=selected;
+            CatCombo.DataContext= new CollectionViewSource { Source = await selected.getTravelLists() };
+            CatCombo.IsEnabled = true;
+        }
+        private void cancel_Click(object sender, RoutedEventArgs e)
+        {
+            StandardPopup.IsOpen = false;
+        }
+        private async void add_Click(object sender, RoutedEventArgs e)
+        {
+            try {
+                Categorie selected = (Categorie)CatCombo.SelectedItem;
+                dc.categorie = selected;
+                add.IsEnabled = false;
+                cancel.IsEnabled = false;
+                int amount;
+                int.TryParse(TxtAmount.Text, out amount);
+                dc.addPackingItem(new PackingItem { Name = TxtItem.Text, Amount = amount });
+                StandardPopup.IsOpen = false;
+            }
+            catch (ArgumentException ex)
+            {
+                MessageDialog msgbox = new MessageDialog(ex.Message);
+                await msgbox.ShowAsync();
+            }
+            finally
+            {
+                add.IsEnabled = true;
+                cancel.IsEnabled = true;
+            }
+        }
 
 
     }
