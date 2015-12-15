@@ -19,6 +19,8 @@ using TravelListAppG7.Domain;
 using Windows.Phone.UI.Input;
 using TravelListAppG7.DataModel;
 using Windows.UI.Popups;
+using Microsoft.WindowsAzure.MobileServices;
+using System.Diagnostics;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -30,7 +32,9 @@ namespace TravelListAppG7.Controls
     public sealed partial class FriendPackingItems : Page
     {
 
-
+        private TravelList bestFit;
+        private double ratio;
+        private double lengthRatio=0;
         private DomainController dc;
         public FriendPackingItems()
         {
@@ -44,9 +48,55 @@ namespace TravelListAppG7.Controls
 
         public async void fillContext()
         {
-
+            MobileServiceCollection<TravelList, TravelList> list = await dc.GetUserDestinations();
+            Char[] friendDest= dc.destinationFriend.Destination.ToCharArray();
+            int teller;
+            int noemer;
+            foreach (TravelList destination in list) {
+                teller = 0;
+                noemer = 0;
+                Char[] dest = destination.Destination.ToCharArray();
+                if (dest.Length > friendDest.Length)
+                {
+                    for (int i = 0; i < friendDest.Length; i++) {
+                        noemer++;
+                        if (friendDest[i] == dest[i]) {
+                            teller++;
+                        }
+                        
+                    }
+                }
+                else {
+                    for (int i = 0; i < dest.Length; i++)
+                    {
+                        noemer++;
+                        if (friendDest[i] == dest[i])
+                        {
+                            teller++;
+                        }
+                    }
+                }
+                if ((teller / noemer) >= ratio) {
+                    double lengthRatioCurrent= (double)dest.Length / (double)friendDest.Length;
+                    Debug.WriteLine(destination.Destination);
+                    Debug.WriteLine(lengthRatioCurrent);
+                    Debug.WriteLine(lengthRatio);
+                    Debug.WriteLine((lengthRatioCurrent <= 1 && lengthRatioCurrent > lengthRatio));
+                    Debug.WriteLine((lengthRatioCurrent > 1 && lengthRatioCurrent < lengthRatio));
+                    Debug.WriteLine((lengthRatioCurrent < 1 && lengthRatioCurrent > lengthRatio) || (lengthRatioCurrent > 1 && lengthRatioCurrent < lengthRatio));
+                    if ((dest.Length / friendDest.Length <= 1 && dest.Length / friendDest.Length > lengthRatio) || (dest.Length / friendDest.Length > 1 && dest.Length / friendDest.Length < lengthRatio)) {
+                        lengthRatio = dest.Length / friendDest.Length;
+                        bestFit = destination;
+                        ratio = teller / noemer;
+                    }
+                    
+                    
+                }
+            }
             this.DataContext = new CollectionViewSource { Source = await dc.getFriendPAckingItems() };
-            DestCombo.DataContext= new CollectionViewSource { Source = await dc.GetUserDestinations() };
+            DestCombo.DataContext= new CollectionViewSource { Source = list };
+            if(bestFit!=null)
+            DestCombo.SelectedItem = bestFit;
             TravelList selected= (TravelList) DestCombo.SelectedItem;
             dc.destination = selected;
             CatCombo.DataContext = new CollectionViewSource { Source = await selected.getTravelLists() };
@@ -74,9 +124,12 @@ namespace TravelListAppG7.Controls
             StandardPopup.HorizontalOffset = (Window.Current.Bounds.Width - PopupGrid.Width) / 2;
             StandardPopup.VerticalOffset = (Window.Current.Bounds.Height - PopupGrid.Height) / 2;
             PackingItem packed = (PackingItem)FriendPacked.SelectedItem;
-            TxtItem.Text = packed.Name;
-            TxtAmount.Text = packed.Amount.ToString();
-            StandardPopup.IsOpen = true;
+            if (packed != null)
+            {
+                TxtItem.Text = packed.Name;
+                TxtAmount.Text = packed.Amount.ToString();
+                StandardPopup.IsOpen = true;
+            }
         }
 
         private async void DestCombo_DropDownClosed(object sender, object e)
