@@ -61,40 +61,50 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="2*" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Item" FontSize="24.667" HorizontalAlignment="Center" />
-                <TextBox Grid.Row="0" Grid.Column="1" Name="TxtItem" Text="" />
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Amount" FontSize="24.667" HorizontalAlignment="Center" />
-                <TextBox Grid.Row="1"  Grid.Column="1" Name="TxtAmount" Text="" />
-                <ComboBox x:Name="DestCombo" Grid.Row="2" Grid.ColumnSpan="2" Header="Destinations" ItemsSource="{Binding}" DropDownClosed="DestCombo_DropDownClosed">
-                    <!--ItemsSource="{Binding Destinations}"-->
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Destination }"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                <ComboBox x:Name="CatCombo" Grid.Row="3" Grid.ColumnSpan="2" Header="Destinations" ItemsSource="{Binding}">
-                    <!--ItemsSource="{Binding Destinations}"-->
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name }"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
 
-                <Button x:Name="cancel" Grid.Row="4" Grid.Column="1" Content="cancel"  HorizontalAlignment="Center" Click="cancel_Click" />
-                <Button x:Name="add" Grid.Row="4" Grid.Column="0" Content="Add"  HorizontalAlignment="Center" Click="add_Click" />
-                
+                <StackPanel Grid.Row="0" Margin="0,18,0,18">
+                    <TextBlock Text="LET'S PACK" Style="{StaticResource TitleTextBlockStyle}" Margin="20,0,16,0" FontSize="30" Foreground="White"/>
+                </StackPanel>
+
+                <Grid x:Name="ContentPanel" Grid.Row="1" Margin="18,0,18,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Item" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="22" Foreground="White" FontWeight="Medium"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Name="TxtItem" Text="" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Amount" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="22" Foreground="White" FontWeight="Medium"/>
+                    <TextBox Grid.Row="1"  Grid.Column="1" Name="TxtAmount" Text="" />
+                    <ComboBox x:Name="DestCombo" Grid.Row="2" Grid.ColumnSpan="2" Header="Destination" ItemsSource="{Binding}" DropDownClosed="DestCombo_DropDownClosed">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Destination }"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ComboBox x:Name="CatCombo" Grid.Row="3" Grid.ColumnSpan="2" Header="Category" ItemsSource="{Binding}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name }"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button Grid.Row ="4" Grid.ColumnSpan="2" x:Name="add" Click="add_Click" HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0">Add</Button>
+                    <Button Grid.Row="5" Grid.ColumnSpan="2" x:Name="cancel" Click="cancel_Click" HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0">Cancel</Button>
+                </Grid>
             </Grid>
         </Popup>
     </Grid>
