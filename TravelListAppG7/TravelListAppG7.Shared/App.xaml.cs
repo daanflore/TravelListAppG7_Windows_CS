@@ -26,16 +26,16 @@ namespace TravelListAppG7
 
         // This MobileServiceClient has been configured to communicate with your local
         // test project for debugging purposes.
-        public static MobileServiceClient MobileService = new MobileServiceClient(
-            "http://localhost:51542"
-        );
+        //public static MobileServiceClient MobileService = new MobileServiceClient(
+        //    "http://localhost:51542"
+        //);
 
         // This MobileServiceClient has been configured to communicate with your Mobile Service's url
         // and application key. You're all set to start working with your Mobile Service!
-        //public static MobileServiceClient MobileService = new MobileServiceClient(
-        //    "https://travellistappg7.azure-mobile.net/",
-        //    "MBdyQxEDyMsGGFbqgkglexXOFtHglu61"
-        //);
+        public static MobileServiceClient MobileService = new MobileServiceClient(
+            "https://travellistappg7.azure-mobile.net/",
+            "MBdyQxEDyMsGGFbqgkglexXOFtHglu61"
+        );
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code

@@ -20,6 +20,7 @@ using TravelListAppG7.DataModel;
 using Windows.Phone.UI.Input;
 using Windows.UI.Popups;
 using System.Threading.Tasks;
+using Microsoft.WindowsAzure.MobileServices;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -60,11 +61,24 @@ namespace TravelListAppG7.Controls
         }
         private async void FriendDest_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            await Task.Delay(50);
-            TravelList selected = FriendDest.SelectedItem as TravelList;
-            dc.destinationFriend = selected;
-            HardwareButtons.BackPressed -= OnBackPressed;
-            Frame.Navigate(typeof(FriendPackingItems));
+            try
+            {
+                await Task.Delay(50);
+                TravelList selected = FriendDest.SelectedItem as TravelList;
+                dc.destinationFriend = selected;
+                
+                MobileServiceCollection<TravelList, TravelList> list = await dc.GetUserDestinations();
+                if (list.Count == 0)
+                {
+                    throw new ArgumentException("you should first make your own destinations");
+                }
+                HardwareButtons.BackPressed -= OnBackPressed;
+                Frame.Navigate(typeof(FriendPackingItems));
+            }
+            catch (ArgumentException ex) {
+                MessageDialog msgbox = new MessageDialog(ex.Message);
+                await msgbox.ShowAsync();
+            }
         }
 
 
