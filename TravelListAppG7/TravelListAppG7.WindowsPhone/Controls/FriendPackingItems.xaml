@@ -10,7 +10,7 @@
     <Page.Resources>
         <DataTemplate x:Name="myTemplate">
             <StackPanel>
-                <CheckBox Name="CheckBoxComplete" IsChecked="{Binding Packed}" Content="{Binding Name}" Margin="10,5" VerticalAlignment="Center" Click="CheckBoxComplete_Click"/>
+                <CheckBox Name="CheckBoxComplete" IsChecked="{Binding Packed}" Content="{Binding Name}" Margin="10,5" VerticalAlignment="Center"/>
                 <TextBlock Text="{Binding Amount}" FontSize="18" Foreground="White"/>
                 <Line Stroke="Black" StrokeThickness="3" X1="0" X2="400" Y1="25" Y2="25"/>
             </StackPanel>
@@ -93,8 +93,8 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <Button Grid.Row ="3" Grid.ColumnSpan="2" Name="add" Click="ButtonAdd_Click" HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0">Add</Button>
-                    <Button Grid.Row="4" Grid.ColumnSpan="2" Name="cancel" Click="ClosePopupClicked" HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0">Cancel</Button>
+                    <Button Grid.Row ="3" Grid.ColumnSpan="2" Name="add" HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0">Add</Button>
+                    <Button Grid.Row="4" Grid.ColumnSpan="2" Name="cancel" HorizontalAlignment="Stretch" Background="Black" FontSize="22" BorderThickness="0">Cancel</Button>
                 </Grid>
             </Grid>
         </Popup>
