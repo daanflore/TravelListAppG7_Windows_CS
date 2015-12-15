@@ -28,8 +28,9 @@ namespace TravelListAppG7.Controls
             HardwareButtons.BackPressed += OnBackPressed;
             fillContext();
         }
-        public async void fillContext() {
-            
+        public async void fillContext()
+        {
+
             this.DataContext = new CollectionViewSource { Source = await dc.GetUserDestinations() };
         }
 
@@ -64,12 +65,13 @@ namespace TravelListAppG7.Controls
         {
             try
             {
-                
+
                 add.IsEnabled = false;
                 cancel.IsEnabled = false;
-                if (DatePicker.Date.Date < DateTime.Now.Date) {
+                if (DatePicker.Date.Date < DateTime.Now.Date)
+                {
                     throw new ArgumentException("If you aren't a time traveler I think it is impossible to travel in the past");
-                    }
+                }
                 TravelList travelList = new TravelList { Destination = TxtDestination.Text, Day = DatePicker.Date.DateTime };
                 dc.addTravelDestination(travelList);
                 TxtDestination.Text = "";
@@ -80,7 +82,8 @@ namespace TravelListAppG7.Controls
                 MessageDialog msgbox = new MessageDialog(ex.Message);
                 await msgbox.ShowAsync();
             }
-            finally {
+            finally
+            {
                 add.IsEnabled = true;
                 cancel.IsEnabled = true;
             }
@@ -100,9 +103,8 @@ namespace TravelListAppG7.Controls
                 Frame.Navigate(typeof(HomePage));
             }
         }
-        
-        private async void StackPanel_Holding(object sender, HoldingRoutedEventArgs e)
-        {
+ private async  void StackPanel_Holding(object sender, HoldingRoutedEventArgs e)
+    {
             try
             {
                 TravelList dest = (TravelList)((FrameworkElement)sender).DataContext;
@@ -120,14 +122,12 @@ namespace TravelListAppG7.Controls
                     }
                 }
             }
-            catch (Exception ex) {
-            }
-
-
+            catch (Exception ex)
+            {
             }
         }
-
-
     }
+   
+}
 
 

@@ -10,17 +10,18 @@
     <Page.Resources>
         <DataTemplate x:Name="myTemplate">
             <StackPanel>
-                <TextBlock Text="{Binding Name}" Margin="10,5" VerticalAlignment="Center"/>
-                <TextBlock Text="{Binding Amount}"/>
-                <TextBlock Text="{Binding PackedString}"/>
-                <Line Stroke="Green" X1="0" X2="300" Y1="25" Y2="25"/>
+                <CheckBox IsEnabled="false" Name="CheckBoxComplete" IsChecked="{Binding Packed}" Content="{Binding Name}" Margin="10,5" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding Amount}" FontSize="18" Foreground="White"/>
+                <Line Stroke="Black" StrokeThickness="3" X1="0" X2="400" Y1="25" Y2="25"/>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
+
     <Grid x:Name="LayoutRoot">
         <Grid.Background>
             <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/PackingBG.jpg" AlignmentY="Top" AlignmentX="Center"/>
         </Grid.Background>
+
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
@@ -32,23 +33,26 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Title Panel -->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,18,0,18">
             <TextBlock Text="LET'S PACK" Style="{StaticResource TitleTextBlockStyle}" Margin="20,0,16,0" FontSize="30" Foreground="White"/>
             <TextBlock Text="FRIEND " Margin="20,0,16,0" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
         </StackPanel>
 
-        <!--TODO: Content should be placed within the following grid-->
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="18,0,18,0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-
             <ListView Grid.Row="1" x:Name="FriendPacked" ItemTemplate="{StaticResource myTemplate}" ItemsSource="{Binding}" Tapped="FriendPacked_Tapped" />
         </Grid>
-        <Popup   x:Name="StandardPopup" >
-            <Grid  x:Name="PopupGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Popup x:Name="StandardPopup">
+            <Grid  x:Name="PopupGrid">
+                <Grid.Background>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/PackingBG.jpg" AlignmentY="Top" AlignmentX="Center"/>
+                </Grid.Background>
+
                 <Grid.ChildrenTransitions>
                     <TransitionCollection>
                         <EntranceThemeTransition/>
@@ -90,10 +94,8 @@
 
                 <Button x:Name="cancel" Grid.Row="4" Grid.Column="1" Content="cancel"  HorizontalAlignment="Center" Click="cancel_Click" />
                 <Button x:Name="add" Grid.Row="4" Grid.Column="0" Content="Add"  HorizontalAlignment="Center" Click="add_Click" />
-
+                
             </Grid>
-
         </Popup>
     </Grid>
-
 </Page>

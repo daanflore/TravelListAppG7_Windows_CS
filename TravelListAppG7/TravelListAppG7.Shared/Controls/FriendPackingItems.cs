@@ -78,6 +78,7 @@ namespace TravelListAppG7.Controls
             TxtAmount.Text = packed.Amount.ToString();
             StandardPopup.IsOpen = true;
         }
+
         private async void DestCombo_DropDownClosed(object sender, object e)
         {
             CatCombo.IsEnabled = false;
@@ -112,6 +113,14 @@ namespace TravelListAppG7.Controls
                 add.IsEnabled = true;
                 cancel.IsEnabled = true;
             }
+        }
+
+
+        private void ClosePopupClicked(object sender, RoutedEventArgs e)
+        {
+            // if the Popup is open, then close it
+            TxtItem.Text = "";
+            StandardPopup.IsOpen = false;
         }
 
 
