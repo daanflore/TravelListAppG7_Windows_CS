@@ -11,7 +11,7 @@
         <DataTemplate x:Name="myTemplate">
             <StackPanel>
                 <TextBlock Text="{Binding Destination}" FontSize="22" Foreground="White"/>
-                <TextBlock Text="{Binding Day}" FontSize="18" Foreground="White"/>
+                <TextBlock Text="{Binding DayToString}" FontSize="18" Foreground="White"/>
                 <Line Stroke="Black" StrokeThickness="3" X1="0" X2="400" Y1="25" Y2="25"/>
             </StackPanel>
         </DataTemplate>
